@@ -15,13 +15,13 @@ public class Main extends Application {
     public static int n = 0; // Number of jobs
     public static int m = 0; // Number of machines
 
-    public static ArrayList<Job> jobs = new ArrayList<>();
+    public static ArrayList<Job> jobs = new ArrayList<>(); // List of all jobs with steps
 
     public static void main(String[] args) {
-        launch(args);
-
         Data data = new Data();
         data.ReadData("./src/test_data/1.txt");
+
+        launch(args);
 
         /*
         // Only used to confirm that jobs with steps work

@@ -3,6 +3,7 @@ package controller;
 public class ACO {
     // https://pdfs.semanticscholar.org/4f18/1229caa22a7fa589b6871083c5ca3679307f.pdf
     // 271911163_Ant_Colony_Optimization_for_Job_Shop_Scheduling_to_Minimize_the_Total_Weighted_Tardiness
+
     private int numberOfAnts = 10;
     private int iterations = 100;
     private double alpha = 1; // Pheromone importance
@@ -10,10 +11,18 @@ public class ACO {
     private double p;
 
     public ACO() {
-        Solve();
+        cumulativeTime();
     }
 
-    private void Solve() {
+    private void cumulativeTime() {
+        for(int i = 0; i < Main.n; i++) {
+            for(int j = 0; j < Main.m; j++) {
+
+            }
+        }
+    }
+
+    private void solve() {
         for(int i = 0; i < iterations; i++) {
 
         }

@@ -24,6 +24,8 @@ public class BA implements Algorithm {
     public void run() {
         population[0] = new Chromosom(Main.n,Main.n);
 
+        population[0].generateRnd();
+
         Gantt rnd = new Gantt();
         rnd.generateFromChromosom(population[0]);
 

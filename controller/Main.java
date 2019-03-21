@@ -36,10 +36,8 @@ public class Main extends Application {
         BA b = new BA();
         b.setJobs(jobs);
         j.setAlgorithm(b);
-
-
+        
         launch(args);
-
     }
 
     public void start(Stage primaryStage) throws Exception {

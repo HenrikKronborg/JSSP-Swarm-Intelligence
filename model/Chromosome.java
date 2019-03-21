@@ -2,10 +2,10 @@ package model;
 
 import java.util.ArrayList;
 
-public class Chromosom {
+public class Chromosome {
     double[][] weights;
 
-    public Chromosom(int jobs, int steps){
+    public Chromosome(int jobs, int steps){
         weights = new double[jobs][steps];
     }
 

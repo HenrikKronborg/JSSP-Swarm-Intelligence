@@ -41,13 +41,19 @@ public class GUI implements Initializable {
 
     private void initColor() {
         colorMap = new HashMap<>();
-        int counter = 25;
+        ArrayList<Integer> randomColors = new ArrayList<>(25);
+        for(int i = 0; i < 25; i++){
+            randomColors.add(i+1);
+        }
+        Collections.shuffle(randomColors);
+
+        int counter = 0;
         for(Job j : Main.jobs){
-            if(counter == 0){
+            if(counter == 25){
                 System.out.println("No more colors... reset");
-                counter = 25;
+                counter = 0;
             }
-                colorMap.put(j.getjobNumber(),"status-"+counter--);
+                colorMap.put(j.getjobNumber(),"status-"+randomColors.get(counter++));
         }
 
     }

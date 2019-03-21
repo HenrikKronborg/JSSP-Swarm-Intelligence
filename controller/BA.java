@@ -1,7 +1,7 @@
 package controller;
 
 import model.Algorithm;
-import model.Chromosom;
+import model.Chromosome;
 import model.Gantt;
 import model.Job;
 
@@ -15,24 +15,20 @@ public class BA implements Algorithm {
     private int recruitedRemainingBestSites;
     private int neighbourhoodSize;
     private double siteAbandonement;
-    private static ArrayList<Job> jobs = new ArrayList<>(); // List of all jobs with steps
 
-
-    public Chromosom[] population = new Chromosom[1];
+    public Chromosome[] population = new Chromosome[1];
 
     @Override
     public void run() {
-        population[0] = new Chromosom(Main.n,Main.n);
+        population[0] = new Chromosome(Main.n,Main.n);
 
-        population[0].generateRnd();
+        population[0].generateChromosome();
 
         Gantt rnd = new Gantt();
-        rnd.generateFromChromosom(population[0]);
-
-
+        rnd.generateFromChromosome(population[0]);
     }
 
     public void setJobs(ArrayList<Job> jobs) {
-        this.jobs = jobs;
+        Main.jobs = jobs;
     }
 }

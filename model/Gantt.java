@@ -10,7 +10,7 @@ public class Gantt {
     ArrayList<ArrayList<Node>> machinTimeline;
     ArrayList<Integer> jobTimeLine;
 
-    public void generateFromChromosom(Chromosom c){
+    public void generateFromChromosome(Chromosome c){
         machinTimeline = new ArrayList<>(Main.m);
         jobTimeLine = new ArrayList<>(Main.n);
 
@@ -63,6 +63,6 @@ public class Gantt {
                 }
             }
         }
-
+        System.out.println("Gantt created");
     }
 }

@@ -21,17 +21,6 @@ public class Main extends Application {
         Data data = new Data();
         data.ReadData("./src/test_data/1.txt");
 
-
-
-        // Only used to confirm that jobs with steps work
-        for(Job j : jobs) {
-            for(Step s : j.getSteps()) {
-                System.out.print(s.getMachineNumber()+", ");
-                System.out.println(s.getProcessingTime());
-                System.out.println();
-            }
-            System.out.println("##############################################");
-        }
         JSSP j = new JSSP();
         BA b = new BA();
         b.setJobs(jobs);
@@ -39,9 +28,7 @@ public class Main extends Application {
 
         j.run();
 
-
         launch(args);
-
     }
 
     public void start(Stage primaryStage) throws Exception {

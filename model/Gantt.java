@@ -72,6 +72,77 @@ public class Gantt {
         System.out.println("Gantt created: "+maxTime);
     }
 
+    public void generateFromChromosomeParallel(Chromosome c){
+        machineTimeline = new ArrayList<>(Main.m);
+        int[] jobTimeLine = new int[Main.n];
+
+        for(int i=0; i< Main.m; i++){
+            machineTimeline.add(new ArrayList<>());
+        }
+
+        PriorityQueue<Node> place = new PriorityQueue<>();
+        ArrayList<Node> toBePlaced = new ArrayList<>();
+
+        for(int i=0;i<Main.jobs.size();i++){
+            for(int j=0;j<Main.jobs.get(i).getSteps().size();j++){
+                Step step = Main.jobs.get(i).getSteps().get(j);
+                Node n = new Node(step.getMachineNumber(),Main.jobs.get(i).getjobNumber(),step.getProcessingTime(),j);
+                n.setWeight(c.getW(n.getJobNumber(),j));
+
+                if(j == 0){
+                    place.add(n);
+                }else{
+                    toBePlaced.add(n);
+                }
+            }
+        }
+
+        while (place.size() + toBePlaced.size() != 0 ){
+            Node node = place.peek();
+            int minTime = Integer.MAX_VALUE;
+            for(Node n : place){
+                int time = jobTimeLine[n.getJobNumber()];
+
+                if(machineTimeline.get(n.getMachineNumber()).size() != 0){
+                    if(machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime() > time){
+                        time = machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime();
+                    }
+                }
+                if(time < minTime){
+                    minTime = time;
+                    node = n;
+                }
+            }
+            place.remove(node);
+            node.setStartTime(minTime); // Does set both start and end time.
+            machineTimeline.get(node.getMachineNumber()).add(node);
+            jobTimeLine[node.getJobNumber()] = node.getEndTime();
+
+            for(int i =0; i < toBePlaced.size(); i++){
+                Node other =  toBePlaced.get(i);
+                if(other.getJobNumber() == node.getJobNumber()){
+                    if(other.getStepNr() - 1 == node.getStepNr()){
+                        place.add(other);
+                        toBePlaced.remove(i);
+                        break;
+                    }
+                }
+            }
+        }
+
+        // Calculate fitness.
+        int maxTime = 0;
+        for (ArrayList<Node> nodes : machineTimeline){
+            for (Node node : nodes){
+                if(maxTime < node.getEndTime()){
+                    maxTime = node.getEndTime();
+                }
+            }
+        }
+        fitness = maxTime;
+        System.out.println("Gantt created: "+maxTime);
+    }
+
     public int getFitness() {
         return fitness;
     }

@@ -25,7 +25,7 @@ public class BA implements Algorithm {
         population[0].generateChromosome();
 
         Gantt rnd = new Gantt();
-        rnd.generateFromChromosome(population[0]);
+        rnd.generateFromChromosomeParallel(population[0]);
         bestSolution = rnd;
     }
 

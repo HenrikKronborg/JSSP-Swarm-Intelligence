@@ -3,7 +3,6 @@ package controller;
 import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
@@ -42,13 +41,13 @@ public class GUI implements Initializable {
 
     private void initColor() {
         colorMap = new HashMap<>();
-        int counter = 2;
+        int counter = 25;
         for(Job j : Main.jobs){
-            if(counter == 26){
+            if(counter == 0){
                 System.out.println("No more colors... reset");
-                counter = 2;
+                counter = 25;
             }
-                colorMap.put(j.getjobNumber(),"status-"+counter++);
+                colorMap.put(j.getjobNumber(),"status-"+counter--);
         }
 
     }
@@ -67,7 +66,7 @@ public class GUI implements Initializable {
         chart.setTitle("Job schedule");
         chart.setLegendVisible(false);
         chart.setBlockHeight( 50);
-
+        chart.setAnimated(false);
         chart.getStylesheets().add(getClass().getResource("../view/ganttchart.css").toExternalForm());
 
     }
@@ -93,7 +92,7 @@ public class GUI implements Initializable {
 
         ArrayList<String> machines = new ArrayList<>();
 
-        for(int i = 0; i < best.getMachinTimeline().size(); i++){
+        for(int i = 0; i < best.getMachineTimeline().size(); i++){
                 machines.add("Machine "+(i+1));
         }
         yAxis.getCategories().clear();
@@ -101,10 +100,10 @@ public class GUI implements Initializable {
 
         // Update Y axis block ended.
 
-        for(int i = 0; i < best.getMachinTimeline().size(); i++){
+        for(int i = 0; i < best.getMachineTimeline().size(); i++){
             XYChart.Series series = new XYChart.Series();
-            for(int j = 0; j < best.getMachinTimeline().get(i).size(); j++){
-                Node currNode = best.getMachinTimeline().get(i).get(j);
+            for(int j = 0; j < best.getMachineTimeline().get(i).size(); j++){
+                Node currNode = best.getMachineTimeline().get(i).get(j);
                 series.getData().add(new XYChart.Data(currNode.getStartTime(), "Machine "+(i+1), new GanttChart.ExtraData( currNode.getProcessingTime(), colorMap.get(currNode.getJobNumber()))));
             }
             chart.getData().add(series);

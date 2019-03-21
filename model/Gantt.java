@@ -6,18 +6,15 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class Gantt {
-    private ArrayList<ArrayList<Node>> machinTimeline;
+    private ArrayList<ArrayList<Node>> machineTimeline;
     private int fitness;
 
     public void generateFromChromosome(Chromosome c){
-        machinTimeline = new ArrayList<>(Main.m);
-        ArrayList<Integer> jobTimeLine = new ArrayList<>(Main.n);
+        machineTimeline = new ArrayList<>(Main.m);
+        int[] jobTimeLine = new int[Main.n];
 
         for(int i=0; i< Main.m; i++){
-            machinTimeline.add(new ArrayList<>());
-        }
-        for(int i=0; i< Main.n; i++){
-            jobTimeLine.add(0);
+            machineTimeline.add(new ArrayList<>());
         }
 
         PriorityQueue<Node> place = new PriorityQueue<>();
@@ -39,17 +36,16 @@ public class Gantt {
 
         while (place.size() + toBePlaced.size() != 0 ){
             Node n = place.poll();
-            int mintime = 0;
-            if(jobTimeLine.size() != 0)
-                mintime = jobTimeLine.get(n.getJobNumber());
-            if(machinTimeline.get(n.getMachineNumber()).size() != 0){
-                if(machinTimeline.get(n.getMachineNumber()).get(machinTimeline.get(n.getMachineNumber()).size()-1).getEndTime() > mintime){
-                    mintime = machinTimeline.get(n.getMachineNumber()).get(machinTimeline.get(n.getMachineNumber()).size()-1).getEndTime();
+            int mintime = jobTimeLine[n.getJobNumber()];
+
+            if(machineTimeline.get(n.getMachineNumber()).size() != 0){
+                if(machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime() > mintime){
+                    mintime = machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime();
                 }
             }
             n.setStartTime(mintime); // Does set both start and end time.
-            machinTimeline.get(n.getMachineNumber()).add(n);
-            jobTimeLine.set(n.getJobNumber(),n.getEndTime());
+            machineTimeline.get(n.getMachineNumber()).add(n);
+            jobTimeLine[n.getJobNumber()] = n.getEndTime();
 
             for(int i =0; i < toBePlaced.size(); i++){
                 Node other =  toBePlaced.get(i);
@@ -65,7 +61,7 @@ public class Gantt {
 
         // Calculate fitness.
         int maxTime = 0;
-        for (ArrayList<Node> nodes : machinTimeline){
+        for (ArrayList<Node> nodes : machineTimeline){
             for (Node node : nodes){
                 if(maxTime < node.getEndTime()){
                     maxTime = node.getEndTime();
@@ -80,7 +76,7 @@ public class Gantt {
         return fitness;
     }
 
-    public ArrayList<ArrayList<Node>> getMachinTimeline() {
-        return machinTimeline;
+    public ArrayList<ArrayList<Node>> getMachineTimeline() {
+        return machineTimeline;
     }
 }

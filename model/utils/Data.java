@@ -37,7 +37,7 @@ public class Data {
                 }
                 // Read data about a job, creating every step and saving the Job to an ArrayList
                 else {
-                    Job job = new Job(lineCounter);
+                    Job job = new Job(lineCounter-1);
 
                     for(int i = 0; i < intLine.length; i += 2) {
                         Step step = new Step(intLine[i], intLine[i+1]);

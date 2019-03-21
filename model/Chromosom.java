@@ -18,4 +18,7 @@ public class Chromosom {
     }
 
 
+    public double getW(int jobNumber, int stepNumber) {
+        return weights[jobNumber][stepNumber];
+    }
 }

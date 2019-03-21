@@ -37,6 +37,8 @@ public class Main extends Application {
         b.setJobs(jobs);
         j.setAlgorithm(b);
 
+        j.run();
+
 
         launch(args);
 

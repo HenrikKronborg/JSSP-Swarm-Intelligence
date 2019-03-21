@@ -33,7 +33,7 @@ public class BA implements Algorithm {
         Main.jobs = jobs;
     }
 
-    public Gantt getBestSoulution(){
+    public Gantt getBestSolution(){
         return bestSolution;
     }
 }

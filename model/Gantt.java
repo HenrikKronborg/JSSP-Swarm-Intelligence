@@ -3,17 +3,15 @@ package model;
 import controller.Main;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.PriorityQueue;
 
 public class Gantt {
-    ArrayList<ArrayList<Node>> machinTimeline;
-    ArrayList<Integer> jobTimeLine;
+    private ArrayList<ArrayList<Node>> machinTimeline;
+    private int fitness;
 
-    int fittness;
     public void generateFromChromosome(Chromosome c){
         machinTimeline = new ArrayList<>(Main.m);
-        jobTimeLine = new ArrayList<>(Main.n);
+        ArrayList<Integer> jobTimeLine = new ArrayList<>(Main.n);
 
         for(int i=0; i< Main.m; i++){
             machinTimeline.add(new ArrayList<>());
@@ -64,6 +62,8 @@ public class Gantt {
                 }
             }
         }
+
+        // Calculate fitness.
         int maxTime = 0;
         for (ArrayList<Node> nodes : machinTimeline){
             for (Node node : nodes){
@@ -72,9 +72,15 @@ public class Gantt {
                 }
             }
         }
-        fittness = maxTime;
+        fitness = maxTime;
         System.out.println("Gantt created: "+maxTime);
     }
 
+    public int getFitness() {
+        return fitness;
+    }
 
+    public ArrayList<ArrayList<Node>> getMachinTimeline() {
+        return machinTimeline;
+    }
 }

@@ -14,4 +14,9 @@ public class PSO implements Algorithm {
         Gantt rnd = new Gantt();
         rnd.generateFromChromosome(population[0]);
     }
+
+    @Override
+    public Gantt getBestSolution() {
+        return null;
+    }
 }

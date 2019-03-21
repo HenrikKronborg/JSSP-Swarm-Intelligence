@@ -1,9 +1,76 @@
-.status-red {
-    -fx-background-color:rgba(128,0,0,0.7);
+.status-1 {
+    -fx-background-color:"#000000";
 }
-.status-green {
-    -fx-background-color:rgba(0,128,0,0.7);
+.status-2 {
+    -fx-background-color:"#000080";
 }
-.status-blue {
-    -fx-background-color:rgba(0,0,128,0.7);
+.status-3 {
+    -fx-background-color:"#0000CD";
+}
+.status-4 {
+    -fx-background-color:"#0000FF";
+}
+.status-5 {
+    -fx-background-color:"#006400";
+}
+.status-6 {
+    -fx-background-color:"#008080";
+}
+.status-7 {
+    -fx-background-color:"#00BFFF";
+}
+.status-8 {
+    -fx-background-color:"#00FA9A";
+}
+.status-9 {
+    -fx-background-color:"#00FF00";
+}
+.status-10 {
+    -fx-background-color:"#00FFFF";
+}
+.status-11 {
+    -fx-background-color:"#191970";
+}
+.status-12{
+    -fx-background-color:"#1E90FF";
+}
+.status-13 {
+    -fx-background-color:"#4B0082";
+}
+.status-14 {
+    -fx-background-color:"#696969";
+}
+.status-15 {
+    -fx-background-color:"#708090";
+}
+.status-16 {
+    -fx-background-color:"#800000";
+}
+.status-17{
+    -fx-background-color:"#800080";
+}
+.status-18 {
+    -fx-background-color:"#808000";
+}
+.status-19 {
+    -fx-background-color:"#DA70D6";
+}
+.status-20 {
+    -fx-background-color:"#E6E6FA";
+}
+.status-21 {
+    -fx-background-color:"#FA8072";
+}
+.status-22 {
+    -fx-background-color:"#FF1493";
+}
+.status-23 {
+     -fx-background-color:"#FFB6C1";
+}
+.status-24 {
+    -fx-background-color:"#FFE4B5";
+}
+
+.status-25 {
+     -fx-background-color:"#FFF0F5";
 }

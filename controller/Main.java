@@ -21,12 +21,6 @@ public class Main extends Application {
         Data data = new Data();
         data.ReadData("./src/test_data/1.txt");
 
-        JSSP j = new JSSP();
-        BA b = new BA();
-        b.setJobs(jobs);
-        j.setAlgorithm(b);
-
-        j.run();
 
         launch(args);
     }

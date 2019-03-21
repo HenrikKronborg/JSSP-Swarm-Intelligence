@@ -10,6 +10,7 @@ public class Gantt {
     ArrayList<ArrayList<Node>> machinTimeline;
     ArrayList<Integer> jobTimeLine;
 
+    int fittness;
     public void generateFromChromosome(Chromosome c){
         machinTimeline = new ArrayList<>(Main.m);
         jobTimeLine = new ArrayList<>(Main.n);
@@ -63,6 +64,17 @@ public class Gantt {
                 }
             }
         }
-        System.out.println("Gantt created");
+        int maxTime = 0;
+        for (ArrayList<Node> nodes : machinTimeline){
+            for (Node node : nodes){
+                if(maxTime < node.getEndTime()){
+                    maxTime = node.getEndTime();
+                }
+            }
+        }
+        fittness = maxTime;
+        System.out.println("Gantt created: "+maxTime);
     }
+
+
 }

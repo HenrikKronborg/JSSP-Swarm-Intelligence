@@ -15,8 +15,6 @@ public class BA implements Algorithm {
     private int recruitedRemainingBestSites;
     private int neighbourhoodSize;
     private double siteAbandonement;
-    private static ArrayList<Job> jobs = new ArrayList<>(); // List of all jobs with steps
-
 
     public Chromosome[] population = new Chromosome[1];
 
@@ -26,11 +24,9 @@ public class BA implements Algorithm {
 
         Gantt rnd = new Gantt();
         rnd.generateFromChromosome(population[0]);
-
-
     }
 
     public void setJobs(ArrayList<Job> jobs) {
-        this.jobs = jobs;
+        Main.jobs = jobs;
     }
 }

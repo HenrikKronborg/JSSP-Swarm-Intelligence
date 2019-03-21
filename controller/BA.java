@@ -16,8 +16,8 @@ public class BA implements Algorithm {
     private int neighbourhoodSize;
     private double siteAbandonement;
 
-    public Chromosome[] population = new Chromosome[1];
-
+    private Chromosome[] population = new Chromosome[1];
+    private Gantt bestSolution;
     @Override
     public void run() {
         population[0] = new Chromosome(Main.n,Main.n);
@@ -26,9 +26,14 @@ public class BA implements Algorithm {
 
         Gantt rnd = new Gantt();
         rnd.generateFromChromosome(population[0]);
+        bestSolution = rnd;
     }
 
     public void setJobs(ArrayList<Job> jobs) {
         Main.jobs = jobs;
+    }
+
+    public Gantt getBestSoulution(){
+        return bestSolution;
     }
 }

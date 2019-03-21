@@ -5,9 +5,20 @@
 
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
+<?import view.GanttChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.CategoryAxis?>
 <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GUI">
    <items>
-      <Canvas fx:id="canvas" height="700.0" width="900.0" />
+      <!--Canvas fx:id="canvas" height="700.0" width="900.0" /-->
+       <GanttChart fx:id="chart">
+           <xAxis>
+               <NumberAxis label="Connectivity" fx:id="xAxis" />
+           </xAxis>
+           <yAxis>
+               <CategoryAxis fx:id="yAxis" label="Deviation" side="LEFT" />
+           </yAxis>
+       </GanttChart>
       <VBox><Button onAction="#run" text="Run"/></VBox>
    </items>
 </SplitPane>

@@ -13,7 +13,7 @@ public class Node implements Comparable<Node>{
     private double weight;
 
 
-    public Node(int machineNumber, int jobNumber, int processingTime,int stepNr) {
+    public Node(int machineNumber, int jobNumber, int processingTime, int stepNr) {
         this.machineNumber = machineNumber;
         this.jobNumber = jobNumber;
         this.processingTime = processingTime;

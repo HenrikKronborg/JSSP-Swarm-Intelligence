@@ -39,7 +39,11 @@ public class Chromosome implements Comparable<Chromosome>{
         return -1;
     }
 
-    public void generateFromSite(Chromosome site) {
-
+    public void generateFromSite(Chromosome site, double patchSize) {
+        for (int i = 0; i < site.weights.length; i++) {
+            for (int j = 0; j< site.weights.length;j++) {
+                this.weights[i][j] = Math.abs(site.weights[i][j]+(Math.random()*patchSize*2 - patchSize) % 1);
+            }
+        }
     }
 }

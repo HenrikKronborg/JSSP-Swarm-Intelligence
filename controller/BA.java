@@ -67,6 +67,11 @@ public class BA implements Algorithm {
                 nbSites.get(site).recruitBee();
             }
 
+            for(NeighborhoodSite n : nbSites){
+                if (n.getSite().getFitness() < bestSolution.getFitness()){
+                    bestSolution = n.getGantt();
+                }
+            }
             scouts.clear();
             for(int bee = 0; bee < numberOfScouts-recruitedEliteSites-recruitedRemainingBestSites; bee++){
                 randomPlaceBee();

@@ -11,9 +11,12 @@ public class NeighborhoodSite implements Comparable<NeighborhoodSite> {
     private Chromosome site;
     private int noImprovement = 0;
 
-    public NeighborhoodSite(double patchSize, Chromosome site, Gantt gantt) {
+    public NeighborhoodSite(double patchSize, Chromosome site) {
+        this.gantt = new Gantt();
+        this.gantt.generatePhenoType(site);
         this.patchSize = patchSize;
         this.site = site;
+
     }
 
     public double getPatchSize() {
@@ -53,11 +56,20 @@ public class NeighborhoodSite implements Comparable<NeighborhoodSite> {
 
     public void recruitBee() {
         Chromosome c =  new Chromosome(Main.n, Main.n);
-        c.generateFromSite(site);
+        c.generateFromSite(site, patchSize);
+
         Gantt gantt = new Gantt();
         gantt.generatePhenoType(c);
-
         c.setFitness(gantt.getFitness());
 
+        if(c.getFitness() < site.getFitness()){
+            this.site = c;
+            this.gantt = gantt;
+            this.noImprovement = 0;
+        }
+    }
+
+    public Gantt getGantt() {
+        return gantt;
     }
 }

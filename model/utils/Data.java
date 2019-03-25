@@ -23,7 +23,7 @@ public class Data {
                 // Remove double space
                 line = line.trim().replaceAll("\\s+", " ");
 
-                if(!line.isBlank()) {
+                if(!line.isEmpty()) {
                     // Split on space
                     String[] splittedLine = line.split(" ");
 

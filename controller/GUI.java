@@ -47,7 +47,9 @@ public class GUI implements Initializable {
 
         for (int i = 0; i < listOfFiles.length; i++) {
             if (listOfFiles[i].isFile()) {
-                objects.add(listOfFiles[i].getName());
+                if(listOfFiles[i].getName().charAt(0) !='.'){
+                    objects.add(listOfFiles[i].getName());
+                }
             }
         }
         cBox.setItems(objects.sorted());

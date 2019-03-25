@@ -1,11 +1,14 @@
 package controller;
 
+import javafx.scene.layout.Priority;
 import model.Algorithm;
 import model.Chromosome;
 import model.Gantt;
 import model.utils.NeighborhoodSite;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.PriorityQueue;
 
 public class BA implements Algorithm {
@@ -17,6 +20,8 @@ public class BA implements Algorithm {
     private int recruitedRemainingBestSites = 20;
     private double neighbourhoodSize = 0.5;
     private int siteAbandonment = 5;
+
+    private double neighbourhoodShrink = 0.95;
 
 
     private PriorityQueue<Chromosome> scouts = new PriorityQueue<>();
@@ -41,21 +46,27 @@ public class BA implements Algorithm {
         }
 
         // Neighborhood search...
+        // The 2 first are elite, the remaining 8 are best
+        ArrayList<NeighborhoodSite> nbSites = new ArrayList<>();
 
-        ArrayList<NeighborhoodSite> neSites = new ArrayList<>();
-        ArrayList<NeighborhoodSite> nb_neSites = new ArrayList<>();
-        while (neSites.size() < numberOfEliteSites){
-            neSites.add(new NeighborhoodSite(neighbourhoodSize,scouts.poll()));
+        for(int i = 0; i < generations; i++) {
+            // Determine the size of the neighborhood
+            for(NeighborhoodSite site : nbSites) {
+                site.setPatchSize(site.getPatchSize() * neighbourhoodShrink);
+            }
+
+            for(int j = 0; j < numberOfBestSites; j++) {
+                if(!scouts.isEmpty()) {
+                    nbSites.add(new NeighborhoodSite(neighbourhoodSize, scouts.poll()));
+                }
+            }
+
+            Collections.sort(nbSites);
+
+            while(nbSites.size() > 10) {
+                nbSites.remove(nbSites.size() - 1);
+            }
         }
-
-        while (nb_neSites.size() < numberOfBestSites - numberOfEliteSites){
-            nb_neSites.add(new NeighborhoodSite(neighbourhoodSize,scouts.poll()));
-        }
-
-
-
-
-
     }
 
     public Gantt getBestSolution(){

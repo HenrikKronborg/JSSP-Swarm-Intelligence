@@ -2,7 +2,7 @@ package model.utils;
 
 import model.Chromosome;
 
-public class NeighborhoodSite {
+public class NeighborhoodSite implements Comparable<NeighborhoodSite> {
     private double patchSize;
 
     private Chromosome site;
@@ -35,5 +35,16 @@ public class NeighborhoodSite {
 
     public void setNoImprovement(int noImprovement) {
         this.noImprovement = noImprovement;
+    }
+
+    @Override
+    public int compareTo(NeighborhoodSite o) {
+        double sum = this.site.getFitness() - o.site.getFitness();
+        if(sum > 0){
+            return 1;
+        }else if(sum == 0){
+            return 0;
+        }
+        return -1;
     }
 }

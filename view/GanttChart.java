@@ -94,8 +94,7 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
                         ellipse.setHeight(getBlockHeight() * ((getYAxis() instanceof NumberAxis) ? Math.abs(((NumberAxis)getYAxis()).getScale()) : 1));
                         y -= getBlockHeight() / 2.0;
 
-                        //Text text = new Text(50, 50, "hei");
-                        Text text = new Text(50, 50, "hei");
+                        Text text = new Text(100, 100, "hei");
                         region.getChildren().add(text);
 
                         // Note: workaround for RT-7689 - saw this in ProgressControlSkin

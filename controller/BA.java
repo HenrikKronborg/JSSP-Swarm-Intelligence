@@ -28,7 +28,9 @@ public class BA implements Algorithm {
             gantt.generatePhenoType(c);
 
             c.setFitness(gantt.getFitness());
-            if(gantt.getFitness() < bestSolution.getFitness()){
+            if(bestSolution == null){
+                bestSolution = gantt;
+            } else if( gantt.getFitness() < bestSolution.getFitness()){
                 bestSolution = gantt;
             }
         }

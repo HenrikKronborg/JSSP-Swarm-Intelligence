@@ -13,7 +13,7 @@
 <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GUI">
    <items>
       <!--Canvas fx:id="canvas" height="700.0" width="900.0" /-->
-       <GanttChart fx:id="chart">
+       <GanttChart fx:id="chart" minWidth="1000">
            <xAxis>
                <NumberAxis label="Connectivity" fx:id="xAxis" />
            </xAxis>

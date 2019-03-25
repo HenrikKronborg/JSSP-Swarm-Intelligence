@@ -14,7 +14,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.ValueAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 public class GanttChart<X,Y> extends XYChart<X,Y> {
@@ -106,8 +109,8 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
 
                         model.Node node = getNode( item.getExtraValue());
 
-                        Text text = new Text("\n\n\n\t(" + (node.getStepNr()+1) + "/" + (node.getJobNumber()+1) + ")");
-                        text.setX(1000);
+                        Text text = new Text("\n\n\n\n\t(" + (node.getStepNr()+1) + "/" + (node.getJobNumber()+1) + ")");
+                        text.setFont(Font.font("Arial", FontWeight.BOLD, 10));
                         region.getChildren().add(text);
 
                         // Note: workaround for RT-7689 - saw this in ProgressControlSkin

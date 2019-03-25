@@ -95,6 +95,8 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
                         y -= getBlockHeight() / 2.0;
 
                         //Text text = new Text(50, 50, "hei");
+                        Text text = new Text(50, 50, "hei");
+                        region.getChildren().add(text);
 
                         // Note: workaround for RT-7689 - saw this in ProgressControlSkin
                         // The region doesn't update itself when the shape is mutated in place, so we

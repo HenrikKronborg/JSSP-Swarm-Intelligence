@@ -22,8 +22,9 @@ public class BA implements Algorithm {
 
     @Override
     public void run() {
-        for (int i= 0; i < numberOfScouts; i++){
+        for(int i = 0; i < numberOfScouts; i++) {
             Chromosome c =  new Chromosome(Main.n, Main.n);
+            c.generateChromosome();
             Gantt gantt = new Gantt();
             gantt.generatePhenoType(c);
 

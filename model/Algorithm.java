@@ -1,7 +1,7 @@
 package model;
 
 public interface Algorithm {
-    int generations = 80;
+    int generations = 300;
 
     void run();
 

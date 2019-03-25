@@ -41,7 +41,16 @@ public class BA implements Algorithm {
             // Determine the size of the neighborhood
             for(NeighborhoodSite site : nbSites) {
                 site.setPatchSize(site.getPatchSize() * neighbourhoodShrink);
+                site.setNoImprovement(site.getNoImprovement()+1);
             }
+
+            for(int site = 0; site < nbSites.size(); site++){
+                if(nbSites.get(site).getNoImprovement() >= siteAbandonment){
+                    nbSites.remove(site);
+                    site -= 1;
+                }
+            }
+
 
             for(int j = 0; j < numberOfBestSites; j++) {
                 if(!scouts.isEmpty()) {

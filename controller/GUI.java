@@ -84,10 +84,9 @@ public class GUI implements Initializable {
 
         chart.setTitle("Job schedule");
         chart.setLegendVisible(false);
-        chart.setBlockHeight( 50);
+        chart.setBlockHeight(50);
         chart.setAnimated(false);
         chart.getStylesheets().add(getClass().getResource("../view/ganttchart.css").toExternalForm());
-
     }
 
     @FXML
@@ -114,7 +113,7 @@ public class GUI implements Initializable {
         ArrayList<String> machines = new ArrayList<>();
 
         for(int i = 0; i < best.getMachineTimeline().size(); i++) {
-            machines.add("Machine "+(i+1));
+            machines.add("Machine " + (i+1));
         }
         yAxis.getCategories().clear();
         yAxis.setCategories(FXCollections.<String>observableArrayList(machines));

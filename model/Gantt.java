@@ -105,8 +105,9 @@ public class Gantt {
                 int time = jobTimeLine[n.getJobNumber()];
 
                 if(machineTimeline.get(n.getMachineNumber()).size() != 0) {
-                    if(machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime() > time) {
-                        time = machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime();
+                    int machineNodeTime = machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime();
+                    if(machineNodeTime > time) {
+                        time = machineNodeTime;
                     }
                 }
 
@@ -117,12 +118,13 @@ public class Gantt {
             }
 
             place.remove(node);
-            node.setStartTime(minTime); // Does set both start and end time.
+            node.setStartTime(minTime); // Sets both start and end time.
             machineTimeline.get(node.getMachineNumber()).add(node);
             jobTimeLine[node.getJobNumber()] = node.getEndTime();
 
+            // Find the next steps and add them in the place queue
             for(int i = 0; i < toBePlaced.size(); i++) {
-                Node other =  toBePlaced.get(i);
+                Node other = toBePlaced.get(i);
                 if(other.getJobNumber() == node.getJobNumber()) {
                     if(other.getStepNr() - 1 == node.getStepNr()) {
                         place.add(other);
@@ -135,8 +137,8 @@ public class Gantt {
 
         // Calculate fitness.
         int maxTime = 0;
-        for (ArrayList<Node> nodes : machineTimeline) {
-            for (Node node : nodes) {
+        for(ArrayList<Node> nodes : machineTimeline) {
+            for(Node node : nodes) {
                 if(maxTime < node.getEndTime()) {
                     maxTime = node.getEndTime();
                 }

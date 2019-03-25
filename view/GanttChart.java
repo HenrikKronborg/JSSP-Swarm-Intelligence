@@ -15,20 +15,19 @@ import javafx.scene.chart.ValueAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Text;
 
 public class GanttChart<X,Y> extends XYChart<X,Y> {
-
     public static class ExtraData {
-
         public long length;
         public String styleClass;
-
 
         public ExtraData(long lengthMs, String styleClass) {
             super();
             this.length = lengthMs;
             this.styleClass = styleClass;
         }
+
         public long getLength() {
             return length;
         }
@@ -41,8 +40,6 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
         public void setStyleClass(String styleClass) {
             this.styleClass = styleClass;
         }
-
-
     }
 
     private double blockHeight = 10;
@@ -68,7 +65,6 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
     }
 
     @Override protected void layoutPlotChildren() {
-
         for (int seriesIndex=0; seriesIndex < getData().size(); seriesIndex++) {
 
             Series<X,Y> series = getData().get(seriesIndex);
@@ -83,6 +79,7 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
                 }
                 Node block = item.getNode();
                 Rectangle ellipse;
+
                 if (block != null) {
                     if (block instanceof StackPane) {
                         StackPane region = (StackPane)item.getNode();
@@ -96,6 +93,8 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
                         ellipse.setWidth( getLength( item.getExtraValue()) * ((getXAxis() instanceof NumberAxis) ? Math.abs(((NumberAxis)getXAxis()).getScale()) : 1));
                         ellipse.setHeight(getBlockHeight() * ((getYAxis() instanceof NumberAxis) ? Math.abs(((NumberAxis)getYAxis()).getScale()) : 1));
                         y -= getBlockHeight() / 2.0;
+
+                        //Text text = new Text(50, 50, "hei");
 
                         // Note: workaround for RT-7689 - saw this in ProgressControlSkin
                         // The region doesn't update itself when the shape is mutated in place, so we
@@ -150,12 +149,9 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
             getPlotChildren().remove(container);
         }
         removeSeriesFromDisplay(series);
-
     }
 
-
     private Node createContainer(Series<X, Y> series, int seriesIndex, final Data<X,Y> item, int itemIndex) {
-
         Node container = item.getNode();
 
         if (container == null) {
@@ -191,5 +187,4 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
             if(yData != null) ya.invalidateRange(yData);
         }
     }
-
 }

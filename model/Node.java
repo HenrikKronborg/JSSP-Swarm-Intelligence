@@ -70,6 +70,8 @@ public class Node implements Comparable<Node>{
         double sum = this.weight - o.weight;
         if(sum > 0){
             return 1;
+        }else if(sum == 0){
+            return 0;
         }
         return -1;
     }

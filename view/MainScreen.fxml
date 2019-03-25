@@ -22,7 +22,7 @@
            </yAxis>
        </GanttChart>
       <VBox>
-          <ChoiceBox fx:id="cBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="222.0" />
+          <ChoiceBox fx:id="cBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="222.0" onAction="#onCBChange" />
           <Button onAction="#run" text="Run"/>
       </VBox>
    </items>

@@ -12,7 +12,7 @@ public class PSO implements Algorithm {
         population[0] = new Chromosome(Main.n,Main.n);
 
         Gantt rnd = new Gantt();
-        rnd.generateFromChromosome(population[0]);
+        rnd.generatePhenoType(population[0]);
     }
 
     @Override

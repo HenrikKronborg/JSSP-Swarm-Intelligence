@@ -34,7 +34,6 @@ public class GUI implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        //initColor();
         initChoiceBox();
         initChart();
     }
@@ -92,13 +91,16 @@ public class GUI implements Initializable {
     }
 
     @FXML
-    public void run() {
+    private void onCBChange(){
         Data.ReadData((String) cBox.getValue());
         initColor();
+    }
 
+    @FXML
+    public void run() {
         BA b = new BA();
-        //b.setJobs(Main.jobs);
         b.run();
+
         Gantt best = b.getBestSolution();
 
         drawBest(best);

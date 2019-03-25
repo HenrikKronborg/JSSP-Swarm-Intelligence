@@ -30,19 +30,7 @@ public class BA implements Algorithm {
     @Override
     public void run() {
         for(int i = 0; i < numberOfScouts; i++) {
-            Chromosome c =  new Chromosome(Main.n, Main.n);
-            c.generateChromosome();
-            Gantt gantt = new Gantt();
-            gantt.generatePhenoType(c);
-
-            scouts.add(c);
-
-            c.setFitness(gantt.getFitness());
-            if(bestSolution == null){
-                bestSolution = gantt;
-            } else if( gantt.getFitness() < bestSolution.getFitness()){
-                bestSolution = gantt;
-            }
+            randomPlaceBee();
         }
 
         // Neighborhood search...
@@ -66,6 +54,39 @@ public class BA implements Algorithm {
             while(nbSites.size() > 10) {
                 nbSites.remove(nbSites.size() - 1);
             }
+
+            // Recruit for elite sites...
+            for (int bee = 0; bee < recruitedEliteSites; bee++){
+                int site = (int)(Math.random()*numberOfEliteSites);
+                nbSites.get(site).recruitBee();
+            }
+
+            // Recruit for RemainingBestSites ...
+            for (int bee = 0; bee < recruitedRemainingBestSites; bee++){
+                int site = (int)(Math.random()*(numberOfBestSites-numberOfEliteSites))+numberOfEliteSites;
+                nbSites.get(site).recruitBee();
+            }
+
+            scouts.clear();
+            for(int bee = 0; bee < numberOfScouts-recruitedEliteSites-recruitedRemainingBestSites; bee++){
+                randomPlaceBee();
+            }
+        }
+    }
+
+    private void randomPlaceBee(){
+        Chromosome c =  new Chromosome(Main.n, Main.n);
+        c.generateChromosome();
+        Gantt gantt = new Gantt();
+        gantt.generatePhenoType(c);
+
+        scouts.add(c);
+
+        c.setFitness(gantt.getFitness());
+        if(bestSolution == null){
+            bestSolution = gantt;
+        } else if( gantt.getFitness() < bestSolution.getFitness()){
+            bestSolution = gantt;
         }
     }
 

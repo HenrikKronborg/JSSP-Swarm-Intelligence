@@ -1,14 +1,17 @@
 package model.utils;
 
+import controller.Main;
 import model.Chromosome;
+import model.Gantt;
 
 public class NeighborhoodSite implements Comparable<NeighborhoodSite> {
     private double patchSize;
 
+    private Gantt gantt;
     private Chromosome site;
     private int noImprovement = 0;
 
-    public NeighborhoodSite(double patchSize, Chromosome site) {
+    public NeighborhoodSite(double patchSize, Chromosome site, Gantt gantt) {
         this.patchSize = patchSize;
         this.site = site;
     }
@@ -46,5 +49,15 @@ public class NeighborhoodSite implements Comparable<NeighborhoodSite> {
             return 0;
         }
         return -1;
+    }
+
+    public void recruitBee() {
+        Chromosome c =  new Chromosome(Main.n, Main.n);
+        c.generateFromSite(site);
+        Gantt gantt = new Gantt();
+        gantt.generatePhenoType(c);
+
+        c.setFitness(gantt.getFitness());
+
     }
 }

@@ -38,4 +38,8 @@ public class Chromosome implements Comparable<Chromosome>{
         }
         return -1;
     }
+
+    public void generateFromSite(Chromosome site) {
+
+    }
 }

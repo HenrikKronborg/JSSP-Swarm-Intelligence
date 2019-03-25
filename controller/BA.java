@@ -3,7 +3,9 @@ package controller;
 import model.Algorithm;
 import model.Chromosome;
 import model.Gantt;
+import model.utils.NeighborhoodSite;
 
+import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class BA implements Algorithm {
@@ -17,7 +19,7 @@ public class BA implements Algorithm {
     private int siteAbandonment = 5;
 
 
-    private PriorityQueue<Chromosome> population = new PriorityQueue<>();
+    private PriorityQueue<Chromosome> scouts = new PriorityQueue<>();
     private Gantt bestSolution;
 
     @Override
@@ -28,6 +30,8 @@ public class BA implements Algorithm {
             Gantt gantt = new Gantt();
             gantt.generatePhenoType(c);
 
+            scouts.add(c);
+
             c.setFitness(gantt.getFitness());
             if(bestSolution == null){
                 bestSolution = gantt;
@@ -35,6 +39,22 @@ public class BA implements Algorithm {
                 bestSolution = gantt;
             }
         }
+
+        // Neighborhood search...
+
+        ArrayList<NeighborhoodSite> neSites = new ArrayList<>();
+        ArrayList<NeighborhoodSite> nb_neSites = new ArrayList<>();
+        while (neSites.size() < numberOfEliteSites){
+            neSites.add(new NeighborhoodSite(neighbourhoodSize,scouts.poll()));
+        }
+
+        while (nb_neSites.size() < numberOfBestSites - numberOfEliteSites){
+            nb_neSites.add(new NeighborhoodSite(neighbourhoodSize,scouts.poll()));
+        }
+
+
+
+
 
     }
 

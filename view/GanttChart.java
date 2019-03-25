@@ -106,7 +106,8 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
 
                         model.Node node = getNode( item.getExtraValue());
 
-                        Text text = new Text("(" + node.getStepNr() + "/" + node.getJobNumber() + ")");
+                        Text text = new Text("\n\n\n\t(" + (node.getStepNr()+1) + "/" + (node.getJobNumber()+1) + ")");
+                        text.setX(1000);
                         region.getChildren().add(text);
 
                         // Note: workaround for RT-7689 - saw this in ProgressControlSkin

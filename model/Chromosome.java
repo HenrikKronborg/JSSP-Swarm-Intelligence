@@ -8,13 +8,12 @@ public class Chromosome {
     }
 
     public void generateChromosome() {
-        for (int i = 0; i < weights.length; i++){
-            for (int j=0; j<weights.length;j++){
+        for (int i = 0; i < weights.length; i++) {
+            for (int j = 0; j<weights.length;j++) {
                 weights[i][j] = Math.random();
             }
         }
     }
-
 
     public double getW(int jobNumber, int stepNumber) {
         return weights[jobNumber][stepNumber];

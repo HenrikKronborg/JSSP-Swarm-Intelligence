@@ -18,15 +18,16 @@ public class BA implements Algorithm {
 
     private Chromosome[] population = new Chromosome[1];
     private Gantt bestSolution;
+
     @Override
     public void run() {
-        population[0] = new Chromosome(Main.n,Main.n);
+        population[0] = new Chromosome(Main.n, Main.n);
 
         population[0].generateChromosome();
 
-        Gantt rnd = new Gantt();
-        rnd.generateFromChromosomeParallel(population[0]);
-        bestSolution = rnd;
+        Gantt gantt = new Gantt();
+        gantt.generateFromChromosomeParallel(population[0]);
+        bestSolution = gantt;
     }
 
     public void setJobs(ArrayList<Job> jobs) {

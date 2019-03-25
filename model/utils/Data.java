@@ -13,38 +13,42 @@ public class Data {
     public static void ReadData(String filename) {
         String line;
         int lineCounter = 0;
+        Main.jobs.clear();
 
         try {
-            FileReader fileReader = new FileReader(filename);
+            FileReader fileReader = new FileReader("./src/test_data/" + filename);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
 
             while((line = bufferedReader.readLine()) != null) {
                 // Remove double space
                 line = line.trim().replaceAll("\\s+", " ");
-                // Split on space
-                String[] splittedLine = line.split(" ");
 
-                // Convert splitted line to integers
-                int[] intLine = new int[splittedLine.length];
-                for(int i = 0; i < splittedLine.length; i++) {
-                    intLine[i] = Integer.parseInt(splittedLine[i]);
-                }
+                if(!line.isBlank()) {
+                    // Split on space
+                    String[] splittedLine = line.split(" ");
 
-                // Read number of jobs and machines
-                if(lineCounter == 0) {
-                    Main.n = intLine[0];
-                    Main.m = intLine[1];
-                }
-                // Read data about a job, creating every step and saving the Job to an ArrayList
-                else {
-                    Job job = new Job(lineCounter-1);
-
-                    for(int i = 0; i < intLine.length; i += 2) {
-                        Step step = new Step(intLine[i], intLine[i+1]);
-                        job.addStep(step);
+                    // Convert splitted line to integers
+                    int[] intLine = new int[splittedLine.length];
+                    for (int i = 0; i < splittedLine.length; i++) {
+                        intLine[i] = Integer.parseInt(splittedLine[i]);
                     }
 
-                    Main.jobs.add(job);
+                    // Read number of jobs and machines
+                    if (lineCounter == 0) {
+                        Main.n = intLine[0];
+                        Main.m = intLine[1];
+                    }
+                    // Read data about a job, creating every step and saving the Job to an ArrayList
+                    else {
+                        Job job = new Job(lineCounter - 1);
+
+                        for (int i = 0; i < intLine.length; i += 2) {
+                            Step step = new Step(intLine[i], intLine[i + 1]);
+                            job.addStep(step);
+                        }
+
+                        Main.jobs.add(job);
+                    }
                 }
 
                 lineCounter++;

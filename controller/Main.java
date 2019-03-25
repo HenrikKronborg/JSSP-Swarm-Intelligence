@@ -18,10 +18,6 @@ public class Main extends Application {
     public static ArrayList<Job> jobs = new ArrayList<>(); // List of all jobs with steps
 
     public static void main(String[] args) {
-        Data data = new Data();
-        data.ReadData("./src/test_data/1.txt");
-
-
         launch(args);
     }
 

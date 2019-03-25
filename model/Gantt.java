@@ -69,7 +69,7 @@ public class Gantt {
             }
         }
         fitness = maxTime;
-        System.out.println("Gantt created: "+maxTime);
+        System.out.println("Gantt created: " + maxTime);
     }
 
     public void generateFromChromosomeParallel(Chromosome c) {

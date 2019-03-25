@@ -21,11 +21,13 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
     public static class ExtraData {
         public long length;
         public String styleClass;
+        public model.Node node;
 
-        public ExtraData(long lengthMs, String styleClass) {
+        public ExtraData(long lengthMs, String styleClass, model.Node node) {
             super();
             this.length = lengthMs;
             this.styleClass = styleClass;
+            this.node = node;
         }
 
         public long getLength() {
@@ -39,6 +41,9 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
         }
         public void setStyleClass(String styleClass) {
             this.styleClass = styleClass;
+        }
+        public model.Node getNode() {
+            return node;
         }
     }
 
@@ -60,6 +65,10 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
         return ((ExtraData) obj).getStyleClass();
     }
 
+    private static model.Node getNode( Object obj) {
+        return ((ExtraData) obj).getNode();
+    }
+
     private static double getLength( Object obj) {
         return ((ExtraData) obj).getLength();
     }
@@ -70,6 +79,7 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
             Series<X,Y> series = getData().get(seriesIndex);
 
             Iterator<Data<X,Y>> iter = getDisplayedDataIterator(series);
+
             while(iter.hasNext()) {
                 Data<X,Y> item = iter.next();
                 double x = getXAxis().getDisplayPosition(item.getXValue());
@@ -94,7 +104,9 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
                         ellipse.setHeight(getBlockHeight() * ((getYAxis() instanceof NumberAxis) ? Math.abs(((NumberAxis)getYAxis()).getScale()) : 1));
                         y -= getBlockHeight() / 2.0;
 
-                        Text text = new Text(100, 100, "hei");
+                        model.Node node = getNode( item.getExtraValue());
+
+                        Text text = new Text("(" + node.getStepNr() + "/" + node.getJobNumber() + ")");
                         region.getChildren().add(text);
 
                         // Note: workaround for RT-7689 - saw this in ProgressControlSkin

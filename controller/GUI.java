@@ -130,8 +130,7 @@ public class GUI implements Initializable {
             XYChart.Series series = new XYChart.Series();
             for(int j = 0; j < best.getMachineTimeline().get(i).size(); j++) {
                 Node currNode = best.getMachineTimeline().get(i).get(j);
-                series.getData().add(new XYChart.Data(currNode.getStartTime(), "Machine "+(i+1), new GanttChart.ExtraData( currNode.getProcessingTime(), colorMap.get(currNode.getJobNumber()))));
-                //series.getData().add(new XYChart.Data(0, "Machine 1", new GanttChart.ExtraData( 58, "#000000")));
+                series.getData().add(new XYChart.Data(currNode.getStartTime(), "Machine "+(i+1), new GanttChart.ExtraData(currNode.getProcessingTime(), colorMap.get(currNode.getJobNumber()), currNode)));
             }
             chart.getData().add(series);
         }

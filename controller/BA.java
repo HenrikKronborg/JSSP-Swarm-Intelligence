@@ -1,13 +1,11 @@
 package controller;
 
-import javafx.scene.layout.Priority;
 import model.Algorithm;
 import model.Chromosome;
 import model.Gantt;
 import model.utils.NeighborhoodSite;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.PriorityQueue;
 

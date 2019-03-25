@@ -10,6 +10,7 @@
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.control.ChoiceBox?>
 
+<?import javafx.scene.control.Label?>
 <SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GUI">
    <items>
       <!--Canvas fx:id="canvas" height="700.0" width="900.0" /-->
@@ -21,9 +22,10 @@
                <CategoryAxis fx:id="yAxis" label="Deviation" side="LEFT" />
            </yAxis>
        </GanttChart>
-      <VBox>
+      <VBox spacing="10">
           <ChoiceBox fx:id="cBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="222.0" onAction="#onCBChange" />
           <Button onAction="#run" text="Run"/>
+          <Label fx:id="fit"/>
       </VBox>
    </items>
 </SplitPane>

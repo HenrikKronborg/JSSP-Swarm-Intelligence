@@ -8,6 +8,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.paint.Color;
 import model.Gantt;
 import model.Job;
@@ -28,6 +29,8 @@ public class GUI implements Initializable {
     private CategoryAxis yAxis;
     @FXML
     private ChoiceBox cBox;
+    @FXML
+    private Label fit;
 
     private HashMap<Integer,String> colorMap;
     Random r = new Random();
@@ -105,6 +108,7 @@ public class GUI implements Initializable {
 
         drawBest(best);
 
+        fit.setText("Fitness: "+ best.getFitness());
         System.out.println("Gantt created: " + best.getFitness());
     }
 

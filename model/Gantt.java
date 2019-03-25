@@ -8,7 +8,7 @@ import java.util.PriorityQueue;
 public class Gantt {
     private ArrayList<ArrayList<Node>> machineTimeline;
     private int fitness;
-    private final double PARALLEL_LIMIT = 1.0;
+    private final double PARALLEL_LIMIT = 0.95;
 
     public void generatePhenoType(Chromosome c) {
         machineTimeline = new ArrayList<>(Main.m);
@@ -93,7 +93,6 @@ public class Gantt {
             }
         }
         fitness = maxTime;
-        System.out.println("Gantt created: " + maxTime);
     }
 
     public int getFitness() {

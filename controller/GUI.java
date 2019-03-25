@@ -104,6 +104,8 @@ public class GUI implements Initializable {
         Gantt best = b.getBestSolution();
 
         drawBest(best);
+
+        System.out.println("Gantt created: " + best.getFitness());
     }
 
     private void drawBest(Gantt best) {

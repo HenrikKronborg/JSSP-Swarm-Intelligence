@@ -15,7 +15,7 @@ public class Particle {
 
     public Particle() {
         // Randomly initiate the current chromosome
-        x = new Chromosome(Main.n, Main.n);
+        x = new Chromosome();
         x.generateChromosome();
 
         Gantt gantt = new Gantt();
@@ -28,8 +28,10 @@ public class Particle {
         bestFitness = currentFitness;
     }
 
-    public void updateVelocity() {
-
+    public void updateVelocity(Chromosome globalBest) {
+        if(v == null){
+            v = new double[Main.m][Main.n];
+        }
     }
 
     public void updatePosition(Chromosome globalBest) {

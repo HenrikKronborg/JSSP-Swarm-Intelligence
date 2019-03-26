@@ -1,12 +1,14 @@
 package model;
 
+import controller.Main;
+
 // The genotype
 public class Chromosome implements Comparable<Chromosome>{
     private double[][] weights;
     private int fitness;
 
-    public Chromosome(int jobs, int steps){
-        weights = new double[jobs][steps];
+    public Chromosome(){
+        weights = new double[Main.n][Main.m];
     }
     
     public void generateChromosome() {

@@ -55,7 +55,7 @@ public class NeighborhoodSite implements Comparable<NeighborhoodSite> {
     }
 
     public void recruitBee() {
-        Chromosome c =  new Chromosome(Main.n, Main.n);
+        Chromosome c =  new Chromosome();
         c.generateFromSite(site, patchSize);
 
         Gantt gantt = new Gantt();

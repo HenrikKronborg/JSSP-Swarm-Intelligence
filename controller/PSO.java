@@ -30,8 +30,8 @@ public class PSO implements Algorithm {
 
             //update position and velocity
             for(Particle p : population) {
-                p.updateVelocity();
-                p.updatePosition();
+                p.updateVelocity(globalBest);
+                p.updatePosition(globalBest);
             }
 
             // Update Global if necessary
@@ -54,7 +54,7 @@ public class PSO implements Algorithm {
         if(globalBest == null){
             return null;
         }
-        
+
         Gantt best = new Gantt();
         best.generatePhenoType(globalBest);
 

@@ -5,6 +5,7 @@ import controller.Main;
 import java.util.ArrayList;
 import java.util.PriorityQueue;
 
+// The phenotype
 public class Gantt {
     private ArrayList<ArrayList<Node>> machineTimeline;
     private int fitness;

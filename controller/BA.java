@@ -21,8 +21,7 @@ public class BA implements Algorithm {
 
     private double neighbourhoodShrink = 0.95;
 
-
-    private PriorityQueue<Chromosome> scouts = new PriorityQueue<>();
+    private PriorityQueue<Chromosome> scouts = new PriorityQueue<>(numberOfScouts);
     private Gantt bestSolution;
 
     @Override
@@ -87,7 +86,7 @@ public class BA implements Algorithm {
     }
 
     private void randomPlaceBee(){
-        Chromosome c =  new Chromosome(Main.n, Main.n);
+        Chromosome c = new Chromosome(Main.n, Main.n);
         c.generateChromosome();
         Gantt gantt = new Gantt();
         gantt.generatePhenoType(c);

@@ -8,7 +8,7 @@ public class Particle {
     private Chromosome x; // Current chromosome
     private Chromosome p; // Personal best chromosome
 
-    private double[][] v; // Velocity
+    private double[][] v = new double[Main.n][Main.m];; // Velocity
 
     private int currentFitness;
     private int bestFitness;
@@ -29,13 +29,29 @@ public class Particle {
     }
 
     public void updateVelocity(Chromosome globalBest) {
-        if(v == null){
-            v = new double[Main.m][Main.n];
-        }
+        double[][] personal =
     }
 
     public void updatePosition(Chromosome globalBest) {
         double[][] newChromosome = new double[x.getWeights().length][x.getWeights()[0].length];
+    }
+
+    public double[][] sumMatrix(double[][] a, double[][] b){
+        if(a.length == b.length && a[0].length == b[0].length){
+            double[][] c =  new double[a.length][a[0].length];
+
+            for (int i = 0; i < a.length; i++) {
+                for (int j = 0; j < a[0].length;j++) {
+                 c[i][j] = a[i][j] +b[i][j];
+                }
+            }
+            return c;
+        }
+        
+        System.out.println("Matrix error");
+        return null;
+
+
     }
 
     public Chromosome getX() {

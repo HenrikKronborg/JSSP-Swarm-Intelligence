@@ -34,6 +34,11 @@ public class PSO implements Algorithm {
                 p.updatePosition();
             }
 
+            // Update Global if necessary
+            for(Particle p : population) {
+                updateGlobal(p);
+            }
+
         }
     }
 
@@ -46,7 +51,13 @@ public class PSO implements Algorithm {
 
     @Override
     public Gantt getBestSolution() {
+        if(globalBest == null){
+            return null;
+        }
+        
+        Gantt best = new Gantt();
+        best.generatePhenoType(globalBest);
 
-        return null;
+        return best;
     }
 }

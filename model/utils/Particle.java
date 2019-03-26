@@ -1,27 +1,39 @@
 package model.utils;
 
+import controller.Main;
 import model.Chromosome;
+import model.Gantt;
 
 public class Particle {
-    Chromosome x;   // Current particle
-    Chromosome p;   // Personal best
+    private Chromosome x; // Current chromosome
+    private Chromosome p; // Personal best chromosome
 
-    double[][] v;     // Velocity
+    private double[][] v; // Velocity
 
-    int currentFitness;
-    int bestFitness;
-
+    private int currentFitness;
+    private int bestFitness;
 
     public Particle() {
+        // Randomly initiate the current chromosome
+        x = new Chromosome(Main.n, Main.n);
+        x.generateChromosome();
+
+        Gantt gantt = new Gantt();
+        gantt.generatePhenoType(x);
+
+        x.setFitness(gantt.getFitness());
+
+        // Calculate current chromosomes fitness
+        currentFitness = x.getFitness();
+        bestFitness = currentFitness;
+    }
+
+    public void updatePosition() {
 
     }
 
-    public void updatePosition(){
-
-    }
-
-    public void updateVelocity(){
-
+    public void updateVelocity() {
+        
     }
 
     public Chromosome getX() {

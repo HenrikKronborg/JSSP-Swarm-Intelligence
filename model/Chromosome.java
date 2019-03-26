@@ -17,7 +17,7 @@ public class Chromosome implements Comparable<Chromosome>{
         weights = new double[Main.n][Main.m];
 
         for (int i = 0; i < chrom.length; i++) {
-            for (int j = 0; j < chrom[i].length;j++) {
+            for (int j = 0; j < chrom[i].length; j++) {
                 weights[i][j] = chrom[i][j];
             }
         }

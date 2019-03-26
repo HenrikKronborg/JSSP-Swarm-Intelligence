@@ -9,6 +9,8 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
 import model.Gantt;
 import model.Job;
@@ -31,6 +33,8 @@ public class GUI implements Initializable {
     private ChoiceBox cBox;
     @FXML
     private Label fit;
+    @FXML
+    private ToggleGroup algorithmChoice;
 
     private HashMap<Integer,String> colorMap;
     Random r = new Random();
@@ -101,15 +105,24 @@ public class GUI implements Initializable {
 
     @FXML
     public void run() {
-        PSO b = new PSO();
-        b.run();
+        RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
+        Gantt best = null;
 
-        Gantt best = b.getBestSolution();
+        if(selectedRadioButton.getText().equals("BA")) {
+            BA ba = new BA();
+            ba.run();
+            best = ba.getBestSolution();
+        }
+        else if(selectedRadioButton.getText().equals("PSO")) {
+            PSO pso = new PSO();
+            pso.run();
+            best = pso.getBestSolution();
+        }
 
         drawBest(best);
 
         fit.setText("Fitness: "+ best.getFitness());
-        System.out.println("Gantt created: " + best.getFitness());
+        System.out.println(selectedRadioButton.getText() + " solution created. Makespan: " + best.getFitness());
     }
 
     private void drawBest(Gantt best) {

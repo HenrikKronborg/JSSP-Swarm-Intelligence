@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.canvas.Canvas?>
-<?import javafx.scene.control.SplitPane?>
-
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Button?>
-<?import view.GanttChart?>
-<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ChoiceBox?>
-
 <?import javafx.scene.control.Label?>
-<SplitPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.121" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GUI">
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import view.GanttChart?>
+
+<SplitPane dividerPositions="0.5" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="700.0" prefWidth="1150.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.GUI">
    <items>
       <!--Canvas fx:id="canvas" height="700.0" width="900.0" /-->
        <GanttChart fx:id="chart" minWidth="1000">
@@ -22,10 +24,38 @@
                <CategoryAxis fx:id="yAxis" side="LEFT" />
            </yAxis>
        </GanttChart>
-      <VBox spacing="10">
-          <ChoiceBox fx:id="cBox" layoutX="14.0" layoutY="14.0" prefHeight="25.0" prefWidth="222.0" onAction="#onCBChange" />
-          <Button onAction="#run" text="Run"/>
-          <Label fx:id="fit"/>
+      <VBox prefHeight="200.0" prefWidth="100.0">
+         <children>
+            <VBox spacing="10">
+                <ChoiceBox fx:id="cBox" layoutX="14.0" layoutY="14.0" onAction="#onCBChange" prefHeight="25.0" prefWidth="222.0" />
+               <HBox prefHeight="0.0" prefWidth="142.0">
+                  <children>
+                     <RadioButton mnemonicParsing="false" selected="true" text="BA">
+                        <toggleGroup>
+                           <ToggleGroup fx:id="algorithmChoice" />
+                        </toggleGroup></RadioButton>
+                     <RadioButton mnemonicParsing="false" text="PSO" toggleGroup="$algorithmChoice">
+                        <HBox.margin>
+                           <Insets left="30.0" />
+                        </HBox.margin>
+                     </RadioButton>
+                  </children>
+               </HBox>
+                <Button onAction="#run" prefHeight="37.0" prefWidth="143.0" text="Run">
+                  <padding>
+                     <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                  </padding>
+               </Button>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                   <Label fx:id="fit" />
+               </children>
+               <VBox.margin>
+                  <Insets top="40.0" />
+               </VBox.margin>
+            </VBox>
+         </children>
       </VBox>
    </items>
 </SplitPane>

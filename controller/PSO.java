@@ -9,8 +9,8 @@ public class PSO implements Algorithm {
 
     private int swarmSize = 10; // Should be between 10-50
     private double neighbourhoodSize = 3; // Should be either 3 or 5
-    private double importanceOfPersonalBest = 2;        // C1
-    private double importanceOfNeighbourhoodBest = 2;   //C2
+    private double importanceOfPersonalBest = 2;      // C1
+    private double importanceOfNeighbourhoodBest = 2; // C2
     public static final double maxVelocity = 0.05;
 
     private Particle[] population = new Particle[swarmSize];
@@ -19,7 +19,7 @@ public class PSO implements Algorithm {
 
     @Override
     public void run() {
-        //Create population and update global fitness, local fittnes done inside Particle class.
+        // Create population and update global fitness, local fitness done inside Particle class.
         for(int i = 0; i < swarmSize; i++) {
             population[i] = new Particle();
 
@@ -28,7 +28,7 @@ public class PSO implements Algorithm {
 
         for(int gen = 0; gen < generations; gen++){
 
-            //update position and velocity
+            // Update position and velocity
             for(Particle p : population) {
                 p.updateVelocity(globalBest,importanceOfPersonalBest, importanceOfNeighbourhoodBest, maxVelocity);
                 p.updatePosition();
@@ -38,7 +38,6 @@ public class PSO implements Algorithm {
             for(Particle p : population) {
                 updateGlobal(p);
             }
-
         }
     }
 

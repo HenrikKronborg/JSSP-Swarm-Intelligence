@@ -47,18 +47,28 @@ public class Particle {
 
         for (int i = 0; i < v.length; i++) {
             for (int j = 0; j < v[0].length;j++) {
-                if(v[i][j] > maxVelocity){
+                if(v[i][j] > maxVelocity) {
                     v[i][j] = maxVelocity;
                 }
             }
         }
-
     }
 
     public void updatePosition() {
         double[][] newChromosome = sumMatrix(x.getWeights(), v);
 
         x = new Chromosome(newChromosome);
+
+        Gantt gantt = new Gantt();
+        gantt.generatePhenoType(x);
+
+        x.setFitness(gantt.getFitness());
+        currentFitness = x.getFitness();
+
+        if(currentFitness < bestFitness) {
+            p = x;
+            bestFitness = currentFitness;
+        }
     }
 
     private static double[][] matrixOperation(double c, double[][] y, double[][] x, double[][] r) {

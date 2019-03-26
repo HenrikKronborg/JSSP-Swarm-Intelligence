@@ -22,6 +22,7 @@ public class Gantt {
         PriorityQueue<Node> place = new PriorityQueue<>();
         ArrayList<Node> toBePlaced = new ArrayList<>();
 
+        // Create the nodes
         for(int i = 0; i < Main.jobs.size(); i++) {
             for(int j = 0; j < Main.jobs.get(i).getSteps().size(); j++){
                 Step step = Main.jobs.get(i).getSteps().get(j);
@@ -85,15 +86,15 @@ public class Gantt {
         }
 
         // Calculate fitness.
-        int maxTime = 0;
+        int minTime = 0;
         for(ArrayList<Node> nodes : machineTimeline) {
             for(Node node : nodes) {
-                if(maxTime < node.getEndTime()) {
-                    maxTime = node.getEndTime();
+                if(minTime < node.getEndTime()) {
+                    minTime = node.getEndTime();
                 }
             }
         }
-        fitness = maxTime;
+        fitness = minTime;
     }
 
     public int getFitness() {

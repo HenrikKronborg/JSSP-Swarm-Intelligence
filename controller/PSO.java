@@ -5,7 +5,9 @@ import model.Chromosome;
 import model.Gantt;
 
 public class PSO implements Algorithm {
-    public Chromosome[] population = new Chromosome[1];
+    private int N = 100;  // Individuals
+    private Chromosome globalBest;
+
 
     @Override
     public void run() {

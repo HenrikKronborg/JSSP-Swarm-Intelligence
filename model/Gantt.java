@@ -26,7 +26,7 @@ public class Gantt {
             for(int j = 0; j < Main.jobs.get(i).getSteps().size(); j++){
                 Step step = Main.jobs.get(i).getSteps().get(j);
                 Node n = new Node(step.getMachineNumber(), Main.jobs.get(i).getjobNumber(), step.getProcessingTime(), j);
-                n.setWeight(c.getW(n.getJobNumber(), j));
+                n.setWeight(c.getWeight(n.getJobNumber(), j));
 
                 if(j == 0) {
                     place.add(n);

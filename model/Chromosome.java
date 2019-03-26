@@ -13,7 +13,7 @@ public class Chromosome implements Comparable<Chromosome>{
     
     public void generateChromosome() {
         for (int i = 0; i < weights.length; i++) {
-            for (int j = 0; j < weights.length;j++) {
+            for (int j = 0; j < weights[i].length;j++) {
                 weights[i][j] = Math.random();
             }
         }
@@ -35,7 +35,7 @@ public class Chromosome implements Comparable<Chromosome>{
 
     public void generateFromSite(Chromosome site, double patchSize) {
         for (int i = 0; i < site.weights.length; i++) {
-            for (int j = 0; j< site.weights.length;j++) {
+            for (int j = 0; j< site.weights[i].length;j++) {
                 this.weights[i][j] = Math.abs(site.weights[i][j]+(Math.random()*patchSize*2 - patchSize) % 1);
             }
         }

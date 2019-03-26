@@ -29,10 +29,10 @@ public class Particle {
     }
 
     public void updateVelocity(Chromosome globalBest) {
-        double[][] personal =
+        double[][] personal;
     }
 
-    public void updatePosition(Chromosome globalBest) {
+    public void updatePosition() {
         double[][] newChromosome = new double[x.getWeights().length][x.getWeights()[0].length];
     }
 

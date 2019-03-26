@@ -31,7 +31,7 @@ public class PSO implements Algorithm {
             //update position and velocity
             for(Particle p : population) {
                 p.updateVelocity(globalBest);
-                p.updatePosition(globalBest);
+                p.updatePosition();
             }
 
             // Update Global if necessary

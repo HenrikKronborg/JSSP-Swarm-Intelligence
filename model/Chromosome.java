@@ -12,6 +12,16 @@ public class Chromosome implements Comparable<Chromosome>{
         // There's the same amount of steps as machines
         weights = new double[Main.n][Main.m];
     }
+
+    public Chromosome(double[][] chrom) {
+        weights = new double[Main.n][Main.m];
+
+        for (int i = 0; i < chrom.length; i++) {
+            for (int j = 0; j < chrom[i].length;j++) {
+                weights[i][j] = chrom[i][j];
+            }
+        }
+    }
     
     public void generateChromosome() {
         for (int i = 0; i < weights.length; i++) {

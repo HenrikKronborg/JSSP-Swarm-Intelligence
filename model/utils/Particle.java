@@ -46,11 +46,12 @@ public class Particle {
     }
 
     public void updatePosition() {
-        double[][] newChromosome = new double[x.getWeights().length][x.getWeights()[0].length];
+        double[][] newChromosome = sumMatrix(x.getWeights(), v);
+
+        x = new Chromosome(newChromosome);
     }
 
     private static double[][] matrixOperation(double c, double[][] y, double[][]x, double[][] r){
-
         double[][] res =  new double[x.length][x[0].length];
         for (int i = 0; i < x.length; i++) {
             for (int j = 0; j < x[0].length;j++) {

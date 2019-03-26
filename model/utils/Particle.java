@@ -28,7 +28,7 @@ public class Particle {
         bestFitness = currentFitness;
     }
 
-    public void updateVelocity(Chromosome g, double C1, double C2) {
+    public void updateVelocity(Chromosome g, double C1, double C2, double maxVelocity) {
         double[][] R1 = new double[g.getWeights().length][g.getWeights()[0].length];
         double[][] R2 = new double[g.getWeights().length][g.getWeights()[0].length];
 
@@ -43,6 +43,15 @@ public class Particle {
         double[][] global =     matrixOperation(C2, g.getWeights(), x.getWeights(), R2);
 
         v = sumMatrix(v, personal, global);
+
+        for (int i = 0; i < v.length; i++) {
+            for (int j = 0; j < v[0].length;j++) {
+                if(v[i][j] > maxVelocity){
+                    v[i][j] = maxVelocity;
+                }
+            }
+        }
+
     }
 
     public void updatePosition() {

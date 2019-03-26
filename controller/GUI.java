@@ -101,7 +101,7 @@ public class GUI implements Initializable {
 
     @FXML
     public void run() {
-        BA b = new BA();
+        PSO b = new PSO();
         b.run();
 
         Gantt best = b.getBestSolution();

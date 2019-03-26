@@ -26,11 +26,12 @@ public class Particle {
         // Calculate current chromosomes fitness
         currentFitness = x.getFitness();
         bestFitness = currentFitness;
+        p = x;
     }
 
     public void updateVelocity(Chromosome g, double C1, double C2, double maxVelocity) {
-        double[][] R1 = new double[g.getWeights().length][g.getWeights()[0].length];
-        double[][] R2 = new double[g.getWeights().length][g.getWeights()[0].length];
+        double[][] R1 = new double[Main.n][Main.m];
+        double[][] R2 = new double[Main.n][Main.m];
 
         for (int i = 0; i < R1.length; i++) {
             for (int j = 0; j < R1[0].length; j++) {

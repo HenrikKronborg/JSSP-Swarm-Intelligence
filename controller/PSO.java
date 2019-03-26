@@ -10,7 +10,7 @@ public class PSO implements Algorithm {
     private double neighbourhoodSize = 3; // Should be either 3 or 5
     private double importanceOfPersonalBest = 2;        // C1
     private double importanceOfNeighbourhoodBest = 2;   //C2
-    private double maxVelocity = 0.05;
+    public static final double maxVelocity = 0.05;
 
     private Chromosome[] population = new Chromosome[swarmSize];
     private Chromosome globalBest;

@@ -13,7 +13,7 @@ public class Particle {
 
 
     public Particle() {
-        
+
     }
 
     public void updatePosition(){

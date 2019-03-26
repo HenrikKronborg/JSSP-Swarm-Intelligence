@@ -4,10 +4,12 @@ import controller.Main;
 
 // The genotype
 public class Chromosome implements Comparable<Chromosome>{
+    // [Jobs][Step]
     private double[][] weights;
     private int fitness;
 
-    public Chromosome(){
+    public Chromosome() {
+        // There's the same amount of steps as machines
         weights = new double[Main.n][Main.m];
     }
     

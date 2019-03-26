@@ -28,61 +28,51 @@ public class Particle {
         bestFitness = currentFitness;
     }
 
-    public void updateVelocity(Chromosome globalBest) {
-        double[][] personal;
+    public void updateVelocity(Chromosome g, double C1, double C2) {
+        double[][] R1 = new double[g.getWeights().length][g.getWeights()[0].length];
+        double[][] R2 = new double[g.getWeights().length][g.getWeights()[0].length];
+
+        for (int i = 0; i < R1.length; i++) {
+            for (int j = 0; j < R1[0].length;j++) {
+                R1[i][j] = Math.random();
+                R2[i][j] = Math.random();
+            }
+        }
+
+        double[][] personal =   matrixOperation(C1, p.getWeights(), x.getWeights(), R1);
+        double[][] global =     matrixOperation(C2, g.getWeights(), x.getWeights(), R2);
+
+        v = sumMatrix(v, personal, global);
     }
 
     public void updatePosition() {
         double[][] newChromosome = new double[x.getWeights().length][x.getWeights()[0].length];
     }
 
-    public static double[][] sumMatrix(double[][] a, double[][] b){
-        if(a.length == b.length && a[0].length == b[0].length){
-            double[][] c =  new double[a.length][a[0].length];
-            for (int i = 0; i < a.length; i++) {
-                for (int j = 0; j < a[0].length;j++) {
-                 c[i][j] = a[i][j] +b[i][j];
-                }
+    private static double[][] matrixOperation(double c, double[][] y, double[][]x, double[][] r){
+
+        double[][] res =  new double[x.length][x[0].length];
+        for (int i = 0; i < x.length; i++) {
+            for (int j = 0; j < x[0].length;j++) {
+                res[i][j] = c*(y[i][j]-x[i][j])*r[i][j];
             }
-            return c;
         }
 
-        System.out.println("Matrix error");
-        return null;
-
+        return res;
     }
 
-    public static double[][] subtractionMatrix(double[][] a, double[][] b){
-        if(a.length == b.length && a[0].length == b[0].length){
-            double[][] c =  new double[a.length][a[0].length];
-            for (int i = 0; i < a.length; i++) {
-                for (int j = 0; j < a[0].length;j++) {
-                    c[i][j] = a[i][j] - b[i][j];
+    private static double[][] sumMatrix(double[][] ... a){
+        double[][] c =  new double[a[0].length][a[0][0].length];
+        for (int i = 0; i < c.length; i++) {
+            for (int j = 0; j < c[0].length;j++) {
+                for(double[][] temp : a){
+                    c[i][j] += temp[i][j];
                 }
             }
-            return c;
         }
-
-        System.out.println("Matrix error");
-        return null;
-
+        return c;
     }
 
-    public static double[][] multiplicationMatrix(double[][] a, double[][] b){
-        if(a.length == b.length && a[0].length == b[0].length){
-            double[][] c =  new double[a.length][a[0].length];
-            for (int i = 0; i < a.length; i++) {
-                for (int j = 0; j < a[0].length;j++) {
-                    c[i][j] = a[i][j] * b[i][j];
-                }
-            }
-            return c;
-        }
-
-        System.out.println("Matrix error");
-        return null;
-
-    }
 
     public Chromosome getX() {
         return x;

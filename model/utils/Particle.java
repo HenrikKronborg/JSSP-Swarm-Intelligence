@@ -33,7 +33,9 @@ public class Particle {
     }
 
     public void updatePosition() {
-        double[][] newChromosome = new double[x.getWeights().length][x.getWeights()[0].length];
+        double[][] newChromosome = sumMatrix(x.getWeights(), v);
+
+        x = new Chromosome(newChromosome);
     }
 
     public static double[][] sumMatrix(double[][] a, double[][] b){
@@ -41,7 +43,7 @@ public class Particle {
             double[][] c =  new double[a.length][a[0].length];
             for (int i = 0; i < a.length; i++) {
                 for (int j = 0; j < a[0].length;j++) {
-                 c[i][j] = a[i][j] +b[i][j];
+                 c[i][j] = a[i][j] + b[i][j];
                 }
             }
             return c;

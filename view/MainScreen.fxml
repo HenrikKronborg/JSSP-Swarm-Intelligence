@@ -16,10 +16,10 @@
       <!--Canvas fx:id="canvas" height="700.0" width="900.0" /-->
        <GanttChart fx:id="chart" minWidth="1000">
            <xAxis>
-               <NumberAxis label="Connectivity" fx:id="xAxis" />
+               <NumberAxis fx:id="xAxis" />
            </xAxis>
            <yAxis>
-               <CategoryAxis fx:id="yAxis" label="Deviation" side="LEFT" />
+               <CategoryAxis fx:id="yAxis" side="LEFT" />
            </yAxis>
        </GanttChart>
       <VBox spacing="10">

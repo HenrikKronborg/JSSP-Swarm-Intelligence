@@ -33,11 +33,7 @@ public class Particle {
     }
 
     public void updatePosition(Chromosome globalBest) {
-        for (int i = 0; i < x.getWeights().length; i++) {
-            for (int j = 0; j < x.getWeights()[i].length;j++) {
-
-            }
-        }
+        double[][] newChromosome = new double[x.getWeights().length][x.getWeights()[0].length];
     }
 
     public static double[][] sumMatrix(double[][] a, double[][] b){

@@ -3,6 +3,7 @@ package controller;
 import model.Algorithm;
 import model.Chromosome;
 import model.Gantt;
+import model.utils.Particle;
 
 public class PSO implements Algorithm {
 
@@ -12,24 +13,40 @@ public class PSO implements Algorithm {
     private double importanceOfNeighbourhoodBest = 2;   //C2
     public static final double maxVelocity = 0.05;
 
-    private Chromosome[] population = new Chromosome[swarmSize];
+    private Particle[] population = new Particle[swarmSize];
     private Chromosome globalBest;
+    private int globalBestValue = Integer.MAX_VALUE;
 
     @Override
     public void run() {
+        //Create population and update global fitness, local fittnes done inside Particle class.
         for(int i = 0; i < swarmSize; i++) {
-            Chromosome c = new Chromosome(Main.n, Main.n);
-            c.generateChromosome();
-            Gantt gantt = new Gantt();
-            gantt.generatePhenoType(c);
+            population[i] = new Particle();
 
-            c.setFitness(gantt.getFitness());
-            population[i] = c;
+            updateGlobal(population[i]);
+        }
+
+        for(int gen = 0; gen < generations; gen++){
+
+            //update position and velocity
+            for(Particle p : population) {
+                p.updateVelocity();
+                p.updatePosition();
+            }
+
+        }
+    }
+
+    private void updateGlobal(Particle indv){
+        if(indv.getBestFitness() < globalBestValue){
+            globalBest = indv.getP();
+            globalBestValue = indv.getBestFitness();
         }
     }
 
     @Override
     public Gantt getBestSolution() {
+
         return null;
     }
 }

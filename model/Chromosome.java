@@ -8,7 +8,7 @@ public class Chromosome implements Comparable<Chromosome>{
     public Chromosome(int jobs, int steps){
         weights = new double[jobs][steps];
     }
-
+    
     public void generateChromosome() {
         for (int i = 0; i < weights.length; i++) {
             for (int j = 0; j < weights.length;j++) {
@@ -17,9 +17,11 @@ public class Chromosome implements Comparable<Chromosome>{
         }
     }
 
-    public double getW(int jobNumber, int stepNumber) {
+    public double getWeight(int jobNumber, int stepNumber) {
         return weights[jobNumber][stepNumber];
     }
+
+    public double[][] getWeights() { return weights; }
 
     public int getFitness() {
         return fitness;
@@ -27,6 +29,14 @@ public class Chromosome implements Comparable<Chromosome>{
 
     public void setFitness(int fitness) {
         this.fitness = fitness;
+    }
+
+    public void generateFromSite(Chromosome site, double patchSize) {
+        for (int i = 0; i < site.weights.length; i++) {
+            for (int j = 0; j< site.weights.length;j++) {
+                this.weights[i][j] = Math.abs(site.weights[i][j]+(Math.random()*patchSize*2 - patchSize) % 1);
+            }
+        }
     }
 
     @Override
@@ -38,13 +48,5 @@ public class Chromosome implements Comparable<Chromosome>{
             return 0;
         }
         return -1;
-    }
-
-    public void generateFromSite(Chromosome site, double patchSize) {
-        for (int i = 0; i < site.weights.length; i++) {
-            for (int j = 0; j< site.weights.length;j++) {
-                this.weights[i][j] = Math.abs(site.weights[i][j]+(Math.random()*patchSize*2 - patchSize) % 1);
-            }
-        }
     }
 }

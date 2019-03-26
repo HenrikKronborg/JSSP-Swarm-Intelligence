@@ -40,10 +40,9 @@ public class Particle {
         }
     }
 
-    public double[][] sumMatrix(double[][] a, double[][] b){
+    public static double[][] sumMatrix(double[][] a, double[][] b){
         if(a.length == b.length && a[0].length == b[0].length){
             double[][] c =  new double[a.length][a[0].length];
-
             for (int i = 0; i < a.length; i++) {
                 for (int j = 0; j < a[0].length;j++) {
                  c[i][j] = a[i][j] +b[i][j];
@@ -51,10 +50,41 @@ public class Particle {
             }
             return c;
         }
-        
+
         System.out.println("Matrix error");
         return null;
 
+    }
+
+    public static double[][] subtractionMatrix(double[][] a, double[][] b){
+        if(a.length == b.length && a[0].length == b[0].length){
+            double[][] c =  new double[a.length][a[0].length];
+            for (int i = 0; i < a.length; i++) {
+                for (int j = 0; j < a[0].length;j++) {
+                    c[i][j] = a[i][j] - b[i][j];
+                }
+            }
+            return c;
+        }
+
+        System.out.println("Matrix error");
+        return null;
+
+    }
+
+    public static double[][] multiplicationMatrix(double[][] a, double[][] b){
+        if(a.length == b.length && a[0].length == b[0].length){
+            double[][] c =  new double[a.length][a[0].length];
+            for (int i = 0; i < a.length; i++) {
+                for (int j = 0; j < a[0].length;j++) {
+                    c[i][j] = a[i][j] * b[i][j];
+                }
+            }
+            return c;
+        }
+
+        System.out.println("Matrix error");
+        return null;
 
     }
 

@@ -98,7 +98,7 @@ public class GUI implements Initializable {
     }
 
     @FXML
-    private void onCBChange(){
+    private void onCBChange() {
         Data.ReadData((String) cBox.getValue());
         initColor();
     }

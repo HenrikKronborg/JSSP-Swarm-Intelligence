@@ -79,7 +79,7 @@ public class BA implements Algorithm {
                 }
             }
             scouts.clear();
-            for(int bee = 0; bee < numberOfScouts-recruitedEliteSites-recruitedRemainingBestSites; bee++){
+            for(int bee = 0; bee < numberOfScouts-numberOfBestSites; bee++){
                 randomPlaceBee();
             }
         }

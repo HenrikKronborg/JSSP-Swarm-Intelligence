@@ -7,7 +7,7 @@ import model.utils.Particle;
 
 public class PSO implements Algorithm {
 
-    private int swarmSize = 10; // Should be between 10-50
+    private int swarmSize = 50; // Should be between 10-50
     private double neighbourhoodSize = 3; // Should be either 3 or 5
     private double importanceOfPersonalBest = 2;      // C1
     private double importanceOfNeighbourhoodBest = 2; // C2

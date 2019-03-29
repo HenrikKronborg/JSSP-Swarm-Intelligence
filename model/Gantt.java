@@ -41,14 +41,14 @@ public class Gantt {
             Node node = place.peek();
             int minTime = Integer.MAX_VALUE;
 
-            if(node.getWeight() > PARALLEL_LIMIT){
+            if(node.getWeight() > PARALLEL_LIMIT) {
                 for(Node n : place) {
                     int time = jobTimeLine[n.getJobNumber()];
 
                     if(machineTimeline.get(n.getMachineNumber()).size() != 0) {
-                        int machineNodeTime = machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime();
-                        if(machineNodeTime > time) {
-                            time = machineNodeTime;
+                        int endTimeOfLastNodeInMachine = machineTimeline.get(n.getMachineNumber()).get(machineTimeline.get(n.getMachineNumber()).size()-1).getEndTime();
+                        if(endTimeOfLastNodeInMachine > time) {
+                            time = endTimeOfLastNodeInMachine;
                         }
                     }
                     if(time < minTime) {
@@ -56,13 +56,13 @@ public class Gantt {
                         node = n;
                     }
                 }
-            }else{
+            } else {
                 minTime = jobTimeLine[node.getJobNumber()];
 
                 if(machineTimeline.get(node.getMachineNumber()).size() != 0) {
-                    int machineNodeTime = machineTimeline.get(node.getMachineNumber()).get(machineTimeline.get(node.getMachineNumber()).size()-1).getEndTime();
-                    if(machineNodeTime > minTime) {
-                        minTime = machineNodeTime;
+                    int endTimeOfLastNodeInMachine = machineTimeline.get(node.getMachineNumber()).get(machineTimeline.get(node.getMachineNumber()).size()-1).getEndTime();
+                    if(endTimeOfLastNodeInMachine > minTime) {
+                        minTime = endTimeOfLastNodeInMachine;
                     }
                 }
             }
@@ -72,11 +72,11 @@ public class Gantt {
             machineTimeline.get(node.getMachineNumber()).add(node);
             jobTimeLine[node.getJobNumber()] = node.getEndTime();
 
-            // Find the next steps and add them in the place queue
+            // Find the next steps in the job sequence and add them in the queue to be placed
             for(int i = 0; i < toBePlaced.size(); i++) {
                 Node other = toBePlaced.get(i);
                 if(other.getJobNumber() == node.getJobNumber()) {
-                    if(other.getStepNr() - 1 == node.getStepNr()) {
+                    if(other.getStepNumber() - 1 == node.getStepNumber()) {
                         place.add(other);
                         toBePlaced.remove(i);
                         break;

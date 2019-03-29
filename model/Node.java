@@ -4,8 +4,7 @@ public class Node implements Comparable<Node>{
     private int machineNumber;
     private int jobNumber;
     private int processingTime;
-    private boolean visited;
-    private int stepNr;
+    private int stepNumber;
 
     private int startTime;
     private int endTime;
@@ -13,11 +12,11 @@ public class Node implements Comparable<Node>{
     private double weight;
 
 
-    public Node(int machineNumber, int jobNumber, int processingTime, int stepNr) {
+    public Node(int machineNumber, int jobNumber, int processingTime, int stepNumber) {
         this.machineNumber = machineNumber;
         this.jobNumber = jobNumber;
         this.processingTime = processingTime;
-        this.stepNr = stepNr;
+        this.stepNumber = stepNumber;
     }
 
     public int getMachineNumber() {
@@ -30,14 +29,6 @@ public class Node implements Comparable<Node>{
 
     public int getProcessingTime() {
         return processingTime;
-    }
-
-    public boolean isVisited() {
-        return visited;
-    }
-
-    public void setVisited(boolean visited) {
-        this.visited = visited;
     }
 
     public int getStartTime() {
@@ -61,8 +52,8 @@ public class Node implements Comparable<Node>{
         this.weight = weight;
     }
 
-    public int getStepNr() {
-        return stepNr;
+    public int getStepNumber() {
+        return stepNumber;
     }
 
     @Override

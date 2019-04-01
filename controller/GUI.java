@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
+import model.Chromosome;
 import model.Gantt;
 import model.Job;
 import model.Node;
@@ -118,6 +119,15 @@ public class GUI implements Initializable {
             pso.run();
             best = pso.getBestSolution();
         }
+
+        /*
+        Chromosome c = new Chromosome();
+        c.generateChromosome();
+        Gantt gantt = new Gantt();
+        gantt.generatePhenoType(c);
+
+        best = gantt;
+        */
 
         drawBest(best);
 

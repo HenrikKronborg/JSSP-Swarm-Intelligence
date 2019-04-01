@@ -106,9 +106,20 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
                         ellipse.setHeight(getBlockHeight() * ((getYAxis() instanceof NumberAxis) ? Math.abs(((NumberAxis)getYAxis()).getScale()) : 1));
                         y -= getBlockHeight() / 2.0;
 
-                        model.Node node = getNode( item.getExtraValue());
+                        model.Node node = getNode(item.getExtraValue());
 
-                        Text text = new Text("\n\n\n\n\t(" + (node.getStepNumber()+1) + "/" + (node.getJobNumber()+1) + ")");
+                        Text text = new Text();
+                        String textContent;
+                        
+                        if(getLength(item.getExtraValue()) < 2) {
+                            textContent = "\n(" + (node.getStepNumber()+1) + "/" + (node.getJobNumber()+1) + ")\t\t\t";
+                            text.setRotate(270);
+                        }
+                        else {
+                            textContent = "\n\n\n\n\t(" + (node.getStepNumber()+1) + "/" + (node.getJobNumber()+1) + ")";
+                        }
+
+                        text.setText(textContent);
                         text.setFont(Font.font("Arial", FontWeight.BOLD, 10));
                         region.getChildren().add(text);
 

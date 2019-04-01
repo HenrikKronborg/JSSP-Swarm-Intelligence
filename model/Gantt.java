@@ -55,7 +55,10 @@ public class Gantt {
                         minTime = time;
                         node = n;
                     }
+
+                    //System.out.println((node.getStepNumber()+1) + "/" + (node.getJobNumber()+1));
                 }
+                //System.out.println("---------------");
             } else {
                 minTime = jobTimeLine[node.getJobNumber()];
 

@@ -24,12 +24,14 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
         public long length;
         public String styleClass;
         public model.Node node;
+        public int makespan;
 
-        public ExtraData(long lengthMs, String styleClass, model.Node node) {
+        public ExtraData(long lengthMs, String styleClass, model.Node node, int makespan) {
             super();
             this.length = lengthMs;
             this.styleClass = styleClass;
             this.node = node;
+            this.makespan = makespan;
         }
 
         public long getLength() {
@@ -47,6 +49,8 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
         public model.Node getNode() {
             return node;
         }
+
+        public int getMakespan() { return makespan; }
     }
 
     private double blockHeight = 10;
@@ -69,6 +73,10 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
 
     private static model.Node getNode( Object obj) {
         return ((ExtraData) obj).getNode();
+    }
+
+    private static int getMakespan( Object obj) {
+        return ((ExtraData) obj).getMakespan();
     }
 
     private static double getLength( Object obj) {
@@ -110,14 +118,36 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
 
                         Text text = new Text();
                         String textContent;
-                        
-                        if(getLength(item.getExtraValue()) < 2) {
+
+                        String stepNumber = Integer.toString(node.getStepNumber() + 1);
+                        String jobNumber = Integer.toString(node.getJobNumber() + 1);
+
+                        if(node.getStepNumber() + 1 < 10) {
+                            stepNumber = "0" + stepNumber;
+                        }
+                        if(node.getJobNumber() + 1 < 10) {
+                            jobNumber = "0" + jobNumber;
+                        }
+
+                        if(getLength(item.getExtraValue()) < getMakespan(item.getExtraValue()) * 0.03) {
+                            textContent = "\n(" + stepNumber + "/" + jobNumber + ")\t\t";
+                            text.setRotate(270);
+                        }
+                        else {
+                            textContent = "\n\n\n\n\t\t(" + stepNumber + "/" + jobNumber + ")";
+                        }
+
+                        /*
+                        if(getLength(item.getExtraValue()) < getMakespan(item.getExtraValue()) * 0.02) {
                             textContent = "\n(" + (node.getStepNumber()+1) + "/" + (node.getJobNumber()+1) + ")\t\t\t";
                             text.setRotate(270);
                         }
                         else {
                             textContent = "\n\n\n\n\t(" + (node.getStepNumber()+1) + "/" + (node.getJobNumber()+1) + ")";
                         }
+                        */
+
+                        System.out.println();
 
                         text.setText(textContent);
                         text.setFont(Font.font("Arial", FontWeight.BOLD, 10));

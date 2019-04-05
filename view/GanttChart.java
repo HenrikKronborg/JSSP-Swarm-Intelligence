@@ -137,18 +137,6 @@ public class GanttChart<X,Y> extends XYChart<X,Y> {
                             textContent = "\n\n\n\n\t\t(" + stepNumber + "/" + jobNumber + ")";
                         }
 
-                        /*
-                        if(getLength(item.getExtraValue()) < getMakespan(item.getExtraValue()) * 0.02) {
-                            textContent = "\n(" + (node.getStepNumber()+1) + "/" + (node.getJobNumber()+1) + ")\t\t\t";
-                            text.setRotate(270);
-                        }
-                        else {
-                            textContent = "\n\n\n\n\t(" + (node.getStepNumber()+1) + "/" + (node.getJobNumber()+1) + ")";
-                        }
-                        */
-
-                        System.out.println();
-
                         text.setText(textContent);
                         text.setFont(Font.font("Arial", FontWeight.BOLD, 10));
                         region.getChildren().add(text);

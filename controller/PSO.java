@@ -5,10 +5,13 @@ import model.Chromosome;
 import model.Gantt;
 import model.utils.Particle;
 
+import java.util.Arrays;
+import java.util.Comparator;
+
 public class PSO implements Algorithm {
 
-    private int swarmSize = 50; // Should be between 10-50
-    private double neighbourhoodSize = 3; // Should be either 3 or 5
+    private int swarmSize = 25; // Should be between 10-50
+    private int neighbourhoodSize = 25; // Should be either 3 or 5
     private double importanceOfPersonalBest = 2;      // C1
     private double importanceOfNeighbourhoodBest = 2; // C2
     public static final double maxVelocity = 0.05;
@@ -30,6 +33,7 @@ public class PSO implements Algorithm {
 
             // Update position and velocity
             for(Particle p : population) {
+                //Chromosome neighbourhoodBest = getNeighbourhoodBest(p);
                 p.updateVelocity(globalBest,importanceOfPersonalBest, importanceOfNeighbourhoodBest, maxVelocity);
                 p.updatePosition();
             }
@@ -46,6 +50,47 @@ public class PSO implements Algorithm {
             globalBest = indv.getP();
             globalBestValue = indv.getBestFitness();
         }
+    }
+
+    private Chromosome getNeighbourhoodBest(Particle indv){
+        double[][] particleDist = new double[population.length][2];
+
+        for(int i=0;i < population.length;i++){
+            Particle p = population[i];
+            if(p.equals(indv)){
+                particleDist[i][0] = 0;
+            }else{
+                particleDist[i][0] = euclideanDist(indv.getX(), population[i].getX());
+            }
+            particleDist[i][1] = i;
+        }
+
+        Arrays.sort(particleDist, Comparator.comparing((double[] arr) -> arr[0]));
+
+        Particle neighbourhoodBest = population[(int)particleDist[0][1]];
+        // Includes itself.
+        for(int i = 1; i <= neighbourhoodSize && i < particleDist.length; i++){
+            if(neighbourhoodBest.getBestFitness() < population[(int)particleDist[i][1]].getBestFitness()){
+                neighbourhoodBest = population[(int)particleDist[i][1]];
+            }
+        }
+
+        return neighbourhoodBest.getP();
+    }
+
+
+    private double euclideanDist(Chromosome c, Chromosome other){
+        double[][] w1 =  c.getWeights();
+        double[][] w2 =  other.getWeights();
+
+        double sum = 0.0;
+        for (int i = 0; i < w1.length; i++){
+            for (int j= 0; j < w1[0].length; j++){
+                sum += Math.pow(w1[i][j]-w2[i][j],2);
+            }
+        }
+
+        return Math.sqrt(sum);
     }
 
     @Override

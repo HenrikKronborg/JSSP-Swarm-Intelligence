@@ -48,7 +48,6 @@ public class BA implements Algorithm {
                 }
             }
 
-
             for(int j = 0; j < numberOfBestSites; j++) {
                 if(!scouts.isEmpty()) {
                     nbSites.add(new NeighborhoodSite(neighbourhoodSize, scouts.poll()));
@@ -57,13 +56,14 @@ public class BA implements Algorithm {
 
             Collections.sort(nbSites);
 
-            while(nbSites.size() > 10) {
+            while(nbSites.size() > numberOfBestSites) {
                 nbSites.remove(nbSites.size() - 1);
             }
 
             // Recruit for elite sites...
             for (int bee = 0; bee < recruitedEliteSites; bee++){
                 int site = (int)(Math.random()*numberOfEliteSites);
+                System.out.println(site + " " + nbSites.size());
                 nbSites.get(site).recruitBee();
             }
 

@@ -16,7 +16,6 @@ public class NeighborhoodSite implements Comparable<NeighborhoodSite> {
         this.gantt.generatePhenoType(site);
         this.patchSize = patchSize;
         this.site = site;
-
     }
 
     public double getPatchSize() {

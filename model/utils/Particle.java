@@ -50,6 +50,9 @@ public class Particle {
                 if(v[i][j] > maxVelocity) {
                     v[i][j] = maxVelocity;
                 }
+                if(v[i][j] < -maxVelocity) {
+                    v[i][j] = -maxVelocity;
+                }
             }
         }
     }

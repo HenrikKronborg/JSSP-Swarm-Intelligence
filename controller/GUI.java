@@ -131,7 +131,7 @@ public class GUI implements Initializable {
 
         drawBest(best);
 
-        fit.setText("Fitness: "+ best.getFitness());
+        fit.setText("Makespan: "+ best.getFitness());
         System.out.println(selectedRadioButton.getText() + " solution created. Makespan: " + best.getFitness());
     }
 

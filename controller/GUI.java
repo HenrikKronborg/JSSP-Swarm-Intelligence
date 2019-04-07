@@ -193,4 +193,35 @@ public class GUI implements Initializable {
 
     }
 
+    @FXML
+    private void bestOf100(){
+        RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
+        Algorithm algorithm;
+        if(selectedRadioButton.getText().equals("BA")) {
+            algorithm = new BA();
+        }
+        else {
+            algorithm = new PSO();
+        }
+
+        int numberOfRuns = 100;
+        Gantt best = null;
+
+        for (int i=0; i<numberOfRuns;i++){
+            algorithm.run();
+            if(best == null){
+                best = algorithm.getBestSolution();
+            }else if(best.getFitness() > algorithm.getBestSolution().getFitness()){
+                best = algorithm.getBestSolution();
+            }
+        }
+
+        drawBest(best);
+
+        fit.setText("Makespan: "+ best.getFitness());
+        System.out.println(selectedRadioButton.getText() + " solution created. Makespan: " + best.getFitness());
+
+
+    }
+
 }

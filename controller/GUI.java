@@ -12,10 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.paint.Color;
-import model.Chromosome;
-import model.Gantt;
-import model.Job;
-import model.Node;
+import model.*;
 import model.utils.Data;
 import view.GanttChart;
 
@@ -161,6 +158,39 @@ public class GUI implements Initializable {
             }
             chart.getData().add(series);
         }
+    }
+    @FXML
+    private void avgAndDev(){
+        RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
+        Algorithm algorithm;
+        if(selectedRadioButton.getText().equals("BA")) {
+            algorithm = new BA();
+        }
+        else {
+            algorithm = new PSO();
+        }
+        int numberOfRuns = 100;
+        double sum = 0.0;
+        double[] results = new double[numberOfRuns];
+
+        for (int i=0; i<numberOfRuns;i++){
+            algorithm.run();
+            results[i] = algorithm.getBestSolution().getFitness();
+            sum += algorithm.getBestSolution().getFitness();
+        }
+        double avg = sum/numberOfRuns;
+        double sd = 0.0;
+        for(double x : results){
+            sd += Math.pow(x-avg,2);
+        }
+        sd /= (numberOfRuns-1);
+        sd = Math.sqrt(sd);
+
+        System.out.println("Results whit n=" + numberOfRuns+", on: "+selectedRadioButton.getText());
+        System.out.println("Average: " + avg);
+        System.out.println("Standard deviation: " + sd);
+
+
     }
 
 }

@@ -63,7 +63,6 @@ public class BA implements Algorithm {
             // Recruit for elite sites...
             for (int bee = 0; bee < recruitedEliteSites; bee++){
                 int site = (int)(Math.random()*numberOfEliteSites);
-                System.out.println(site + " " + nbSites.size());
                 nbSites.get(site).recruitBee();
             }
 

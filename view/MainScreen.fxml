@@ -46,6 +46,11 @@
                      <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
                   </padding>
                </Button>
+                <Button onAction="#avgAndDev" prefHeight="37.0" prefWidth="143.0" text="Avg. and SD print">
+                    <padding>
+                        <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
+                    </padding>
+                </Button>
             </VBox>
             <VBox prefHeight="200.0" prefWidth="100.0">
                <children>

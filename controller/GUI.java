@@ -163,17 +163,18 @@ public class GUI implements Initializable {
     private void avgAndDev(){
         RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
         Algorithm algorithm;
-        if(selectedRadioButton.getText().equals("BA")) {
-            algorithm = new BA();
-        }
-        else {
-            algorithm = new PSO();
-        }
+
         int numberOfRuns = 100;
         double sum = 0.0;
         double[] results = new double[numberOfRuns];
 
         for (int i=0; i<numberOfRuns;i++){
+            if(selectedRadioButton.getText().equals("BA")) {
+                algorithm = new BA();
+            }
+            else {
+                algorithm = new PSO();
+            }
             algorithm.run();
             results[i] = algorithm.getBestSolution().getFitness();
             sum += algorithm.getBestSolution().getFitness();
@@ -197,17 +198,17 @@ public class GUI implements Initializable {
     private void bestOf100(){
         RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
         Algorithm algorithm;
-        if(selectedRadioButton.getText().equals("BA")) {
-            algorithm = new BA();
-        }
-        else {
-            algorithm = new PSO();
-        }
 
         int numberOfRuns = 100;
         Gantt best = null;
 
         for (int i=0; i<numberOfRuns;i++){
+            if(selectedRadioButton.getText().equals("BA")) {
+                algorithm = new BA();
+            }
+            else {
+                algorithm = new PSO();
+            }
             algorithm.run();
             if(best == null){
                 best = algorithm.getBestSolution();

@@ -7,10 +7,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import model.*;
 import model.utils.Data;
@@ -19,6 +16,7 @@ import view.GanttChart;
 import java.io.File;
 import java.net.URL;
 import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 public class GUI implements Initializable {
     @FXML
@@ -33,9 +31,17 @@ public class GUI implements Initializable {
     private Label fit;
     @FXML
     private ToggleGroup algorithmChoice;
+    @FXML
+    private Button hundredBtn;
+    @FXML
+    private Button avgBtn;
 
     private HashMap<Integer,String> colorMap;
     Random r = new Random();
+
+    private final int N = 4;
+    private Thread[] threads = new Thread[N];
+    private CountDownLatch doneSignal = new CountDownLatch(N);
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -159,6 +165,7 @@ public class GUI implements Initializable {
             chart.getData().add(series);
         }
     }
+
     @FXML
     private void avgAndDev(){
         RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
@@ -196,33 +203,63 @@ public class GUI implements Initializable {
 
     @FXML
     private void bestOf100(){
+        doneSignal = new CountDownLatch(N);
+        avgBtn.setDisable(true);
+        hundredBtn.setDisable(true);
         RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
-        Algorithm algorithm;
-
-        int numberOfRuns = 100;
         Gantt best = null;
 
-        for (int i=0; i<numberOfRuns;i++){
-            if(selectedRadioButton.getText().equals("BA")) {
-                algorithm = new BA();
-            }
-            else {
-                algorithm = new PSO();
-            }
-            algorithm.run();
+        ArrayList<Gantt> results = runThreads();
+        try {
+            doneSignal.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        for(Gantt result : results){
             if(best == null){
-                best = algorithm.getBestSolution();
-            }else if(best.getFitness() > algorithm.getBestSolution().getFitness()){
-                best = algorithm.getBestSolution();
+                best = result;
+            }else if(best.getFitness() > result.getFitness()){
+                best = result;
             }
         }
 
         drawBest(best);
 
-        fit.setText("Best of 100. Makespan: "+ best.getFitness());
-        System.out.println(selectedRadioButton.getText() + " solution created. Makespan: " + best.getFitness());
+        fit.setText("Makespan: "+ best.getFitness());
+        System.out.println("Best of 100." + selectedRadioButton.getText() + " solution created. Makespan: " + best.getFitness());
 
+        avgBtn.setDisable(false);
+        hundredBtn.setDisable(false);
 
     }
 
+
+
+    private ArrayList<Gantt> runThreads() {
+        ArrayList<Gantt> population = new ArrayList<>();
+        RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
+        int toAdd = 25;
+
+        for(int i = 0; i < threads.length; i++) {
+            threads[i] = new Thread(() -> {
+                int added = 0;
+                while(added < toAdd) {
+                    Algorithm algorithm;
+                    if(selectedRadioButton.getText().equals("BA")) {
+                        algorithm = new BA();
+                    }
+                    else {
+                        algorithm = new PSO();
+                    }
+                    algorithm.run();
+                    population.add(algorithm.getBestSolution());
+                    added++;
+                }
+                doneSignal.countDown();
+            });
+            threads[i].start();
+        }
+
+        return population;
+    }
 }

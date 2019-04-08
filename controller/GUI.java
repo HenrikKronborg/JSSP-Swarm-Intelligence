@@ -1,5 +1,6 @@
 package controller;
 
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -206,23 +207,30 @@ public class GUI implements Initializable {
         doneSignal = new CountDownLatch(N);
         avgBtn.setDisable(true);
         hundredBtn.setDisable(true);
+
+        Thread t = new Thread(() -> {
+            ArrayList<Gantt> results = runThreads();
+            try {
+                doneSignal.await();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Platform.runLater(() -> printBest(results));
+        });
+        t.start();
+
+    }
+
+    private void printBest(ArrayList<Gantt> results){
         RadioButton selectedRadioButton = (RadioButton) algorithmChoice.getSelectedToggle();
         Gantt best = null;
-
-        ArrayList<Gantt> results = runThreads();
-        try {
-            doneSignal.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        for(Gantt result : results){
-            if(best == null){
+        for (Gantt result : results) {
+            if (best == null) {
                 best = result;
-            }else if(best.getFitness() > result.getFitness()){
+            } else if (best.getFitness() > result.getFitness()) {
                 best = result;
             }
         }
-
         drawBest(best);
 
         fit.setText("Makespan: "+ best.getFitness());
@@ -230,8 +238,8 @@ public class GUI implements Initializable {
 
         avgBtn.setDisable(false);
         hundredBtn.setDisable(false);
-
     }
+
 
 
 

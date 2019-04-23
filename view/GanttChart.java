@@ -19,6 +19,19 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
+/**
+ * The following class is modified code from this Stack Overflow thread:
+ * https://stackoverflow.com/questions/27975898/gantt-chart-from-scratch
+ *
+ * This is class creates GUI object for javaFX, and its propose is to display data in the form of a gantt chart on screen.
+ * Since the presentation of the resulting solutions is not considered as the focus of the assignment,
+ * and with the advice from our student assistants. A decision was made not to make this specific class our self,
+ * but modify exiting code.
+ *
+ * The swarm algorithms are the assignments main focus, and all other classes are created by us only.
+ *
+ *
+ */
 public class GanttChart<X,Y> extends XYChart<X,Y> {
     public static class ExtraData {
         public long length;
